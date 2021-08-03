@@ -1,5 +1,6 @@
 ﻿using CardFile.WebAPI.Interfaces;
-using CardFile.WebAPI.Models;
+using CardFile.WebAPI.Models.Request;
+using CardFile.WebAPI.Models.Response;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
@@ -58,7 +59,6 @@ namespace CardFile.WebAPI.Services
                 await _mailService.SendEmailAsync(identityUser.Email, "Confirm your email", $"<h1>Welcome to Auth Demo</h1>" +
                     $"<p>Please confirm your email by <a href='{url}'>Clicking here</a></p>");
 
-
                 return new UserManagerResponse
                 {
                     Message = "User created successfully!",
@@ -72,7 +72,6 @@ namespace CardFile.WebAPI.Services
                 IsSuccess = false,
                 Errors = result.Errors.Select(e => e.Description)
             };
-
         }
 
         public async Task<UserManagerResponse> LoginUserAsync(Login model)

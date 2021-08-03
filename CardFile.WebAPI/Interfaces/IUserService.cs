@@ -1,4 +1,5 @@
-﻿using CardFile.WebAPI.Models;
+﻿using CardFile.WebAPI.Models.Request;
+using CardFile.WebAPI.Models.Response;
 using System.Threading.Tasks;
 
 namespace CardFile.WebAPI.Interfaces
