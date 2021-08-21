@@ -1,0 +1,12 @@
+C:\Users\user\source\repos\CardFile\CardFile.DAL\bin\Debug\netcoreapp3.1\CardFile.DAL.deps.json
+C:\Users\user\source\repos\CardFile\CardFile.DAL\bin\Debug\netcoreapp3.1\CardFile.DAL.runtimeconfig.json
+C:\Users\user\source\repos\CardFile\CardFile.DAL\bin\Debug\netcoreapp3.1\CardFile.DAL.runtimeconfig.dev.json
+C:\Users\user\source\repos\CardFile\CardFile.DAL\bin\Debug\netcoreapp3.1\CardFile.DAL.dll
+C:\Users\user\source\repos\CardFile\CardFile.DAL\bin\Debug\netcoreapp3.1\CardFile.DAL.pdb
+C:\Users\user\source\repos\CardFile\CardFile.DAL\obj\Debug\netcoreapp3.1\CardFile.DAL.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\CardFile\CardFile.DAL\obj\Debug\netcoreapp3.1\CardFile.DAL.AssemblyInfo.cs
+C:\Users\user\source\repos\CardFile\CardFile.DAL\obj\Debug\netcoreapp3.1\CardFile.DAL.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\CardFile\CardFile.DAL\obj\Debug\netcoreapp3.1\CardFile.DAL.dll
+C:\Users\user\source\repos\CardFile\CardFile.DAL\obj\Debug\netcoreapp3.1\CardFile.DAL.pdb
+C:\Users\user\source\repos\CardFile\CardFile.DAL\obj\Debug\netcoreapp3.1\CardFile.DAL.genruntimeconfig.cache
+C:\Users\user\source\repos\CardFile\CardFile.DAL\obj\Debug\netcoreapp3.1\CardFile.DAL.csprojAssemblyReference.cache

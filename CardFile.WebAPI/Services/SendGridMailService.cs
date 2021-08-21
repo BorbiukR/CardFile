@@ -19,7 +19,7 @@ namespace CardFile.WebAPI.Services
         {
             var apiKey = _configuration["SendGridAPIKey"];
             var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("robotaborbiuk@gmail.com", "JWT Auth Demo");
+            var from = new EmailAddress("robotaborbiuk@gmail.com", "Card File Application");
             var to = new EmailAddress(toEmail);
             var msg = MailHelper.CreateSingleEmail(from, to, subject, content, content);
             var response = await client.SendEmailAsync(msg);

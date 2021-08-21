@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using CardFile.DAL.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,7 +12,8 @@ namespace CardFile.DAL
 {
     public class CardFileDbContext : IdentityDbContext<IdentityUser>
     {
-        //public DbSet<User> Users { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
+
         public CardFileDbContext(DbContextOptions options) : base(options)
         {
             
@@ -21,14 +23,15 @@ namespace CardFile.DAL
             optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=IdintityCardFileAPI;Trusted_Connection=True;");
         }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<User>(entity =>
-        //    {
-        //        entity.HasKey(x => x.Id);
-        //        entity.HasOne(x => x.Order)
-        //            .WithOne(x => x.User);
-        //    });
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<User>(entity =>
+            //{
+            //    entity.HasKey(x => x.Id);
+            //    entity.HasOne(x => x.Order)
+            //        .WithOne(x => x.User);
+            //});
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

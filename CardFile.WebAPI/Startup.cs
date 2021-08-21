@@ -1,4 +1,5 @@
 using CardFile.DAL;
+using CardFile.WebAPI.Installers;
 using CardFile.WebAPI.Interfaces;
 using CardFile.WebAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -11,13 +12,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Collections.Generic;
 using System.Text;
 
 namespace CardFile.WebAPI
-{ // TODO : розібратися із JWT токеном  + "AuthSettings:Key"
+{   // TODO : додивитися як покращити Identity в туторіалах
 
     // в контроллер, щоб зробити аутентифікацію
-    // [Authorize]
+    // [Authorize(Role = "Admin")]
     // var userId = User.FindFirst(ClaimTypes.NameIdentifier);
     public class Startup
     {
@@ -30,46 +32,8 @@ namespace CardFile.WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<CardFileDbContext>(options => options.UseSqlServer(connection));
-
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
-            {
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequiredLength = 5;
-                
-            }).AddEntityFrameworkStores<CardFileDbContext>()
-              .AddDefaultTokenProviders();
-
-            services.AddAuthentication(auth =>
-            {
-                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
-            }).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidAudience = Configuration["AuthSettings:Audience"],
-                    ValidIssuer = Configuration["AuthSettings:Issuer"],
-                    RequireExpirationTime = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["AuthSettings:Key"])),
-                    ValidateIssuerSigningKey = true
-                };
-            });
-
-            services.AddScoped<IUserService, UserService>();
-            services.AddTransient<IMailService, SendGridMailService>();
-
-            services.AddControllers();
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CardFile.WebAPI", Version = "v1" });
-            });
+            services.InstallServicesInAssembly(Configuration);
+            //services.AddAutoMapper(typeof(Startup));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -79,6 +43,10 @@ namespace CardFile.WebAPI
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CardFile.WebAPI v1"));
+            }
+            else
+            {
+                app.UseHsts();
             }
 
             app.UseHttpsRedirection();
@@ -93,6 +61,7 @@ namespace CardFile.WebAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
         }
     }

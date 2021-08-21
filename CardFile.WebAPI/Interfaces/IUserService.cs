@@ -1,19 +1,20 @@
-﻿using CardFile.WebAPI.Models.Request;
-using CardFile.WebAPI.Models.Response;
+﻿using CardFile.WebAPI.Domain;
+using CardFile.WebAPI.Models;
+using CardFile.WebAPI.Models.Request;
 using System.Threading.Tasks;
 
 namespace CardFile.WebAPI.Interfaces
 {
     public interface IUserService
     {
-        Task<UserManagerResponse> RegisterUserAsync(Register model);
+        Task<AuthenticationResult> RegisterUserAsync(UserRegistrationRequest model);
 
-        Task<UserManagerResponse> LoginUserAsync(Login model);
+        Task<AuthenticationResult> LoginUserAsync(UserLoginRequest model);
 
-        Task<UserManagerResponse> ConfirmEmailAsync(string userId, string token);
+        Task<AuthenticationResult> ConfirmEmailAsync(string userId, string token);
 
-        Task<UserManagerResponse> ForgetPasswordAsync(string email);
+        Task<AuthenticationResult> ForgetPasswordAsync(string email);
 
-        Task<UserManagerResponse> ResetPasswordAsync(ResetPassword model);
+        Task<AuthenticationResult> ResetPasswordAsync(ResetPasswordRequest model);
     }
 }

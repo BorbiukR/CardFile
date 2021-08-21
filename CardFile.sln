@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardFile.WebAPI", "CardFile.WebAPI\CardFile.WebAPI.csproj", "{F3C91F6C-961B-4228-90EE-85832440EE35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardFile.BLL", "CardFile.BLL\CardFile.BLL.csproj", "{C9AC1CE3-279D-4DAC-881B-B7FD51A4CA05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardFile.BLL", "CardFile.BLL\CardFile.BLL.csproj", "{C9AC1CE3-279D-4DAC-881B-B7FD51A4CA05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardFile.DAL", "CardFile.DAL\CardFile.DAL.csproj", "{7DD16501-3C96-4C84-94EA-EE50A7EE0F5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardFile.DAL", "CardFile.DAL\CardFile.DAL.csproj", "{7DD16501-3C96-4C84-94EA-EE50A7EE0F5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
