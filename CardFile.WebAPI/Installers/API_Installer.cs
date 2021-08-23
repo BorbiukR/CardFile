@@ -41,6 +41,8 @@ namespace CardFile.WebAPI.Installers
                 options.TokenValidationParameters = tokenValidationParameters;
             });
 
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddScoped<IUserService, UserService>();
             services.AddTransient<IMailService, SendGridMailService>();
 

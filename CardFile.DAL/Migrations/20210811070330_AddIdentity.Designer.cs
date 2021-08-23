@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CardFile.DAL.Migrations
 {
-    [DbContext(typeof(CardFileDbContext))]
+    [DbContext(typeof(CardFileIdentityDbContext))]
     [Migration("20210811070330_AddIdentity")]
     partial class AddIdentity
     {

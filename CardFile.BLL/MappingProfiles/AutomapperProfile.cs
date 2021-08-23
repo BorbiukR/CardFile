@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using CardFile.BLL.DTO;
+using CardFile.DAL.Entities;
 
 namespace CardFile.BLL.MappingProfiles
 {
-    public class AutomapperProfile
+    public class AutomapperProfile : Profile
     {
         public AutomapperProfile()
         {
-            //CreateMap<User, UserDTO>();
-            //CreateMap<Product, ProductDTO>();
-            //CreateMap<ProductCategory, ProductCategoryDTO>();
-            //CreateMap<OrderItem, OrderItemDTO>();
-            //CreateMap<Order, OrderDTO>().ReverseMap();
-            //CreateMap<OrderStatus, OrderStatusDTO>();
+            CreateMap<CardTextFile, CardTextFileDTO>();
         }
     }
 }

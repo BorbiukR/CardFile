@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CardFile.DAL.Migrations
 {
-    [DbContext(typeof(CardFileDbContext))]
+    [DbContext(typeof(CardFileIdentityDbContext))]
     partial class CardFileDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
