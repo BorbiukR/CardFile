@@ -1,6 +1,4 @@
-using System;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace CardFile.Interfaces
@@ -18,7 +16,5 @@ namespace CardFile.Interfaces
         void Delete(TEntity entity);
 
         Task DeleteByIdAsync(int id);
-
-        IQueryable<TEntity> FindByCondition(Expression<Func<TEntity, bool>> expression);
     }
 }

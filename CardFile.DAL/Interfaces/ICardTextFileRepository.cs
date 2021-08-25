@@ -3,8 +3,8 @@ using CardFile.Interfaces;
 
 namespace CardFile.DAL.Interfaces
 {
-    public interface ICardTextFileRepository : IRepository<CardTextFile>
+    public interface ICardTextFileRepository : IRepository<CardFileEntitie>
     {
-
+        
     }
 }

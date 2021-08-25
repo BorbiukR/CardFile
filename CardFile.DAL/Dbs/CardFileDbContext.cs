@@ -5,11 +5,11 @@ namespace CardFile.DAL
 {
     public class CardFileDbContext : DbContext
     {
-        public DbSet<CardTextFile> CardTextFiles { get; set; }
+        public DbSet<CardFileEntitie> CardTextFiles { get; set; }
 
         //public DbSet<RefreshToken> RefreshTokens { get; set; }
 
-        public CardFileDbContext(DbContextOptions options) : base(options)
+        public CardFileDbContext(DbContextOptions<CardFileDbContext> options) : base(options)
         {
             
         }

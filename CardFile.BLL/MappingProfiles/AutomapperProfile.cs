@@ -8,7 +8,7 @@ namespace CardFile.BLL.MappingProfiles
     {
         public AutomapperProfile()
         {
-            CreateMap<CardTextFile, CardTextFileDTO>();
+            CreateMap<CardFileEntitie, CardFileDTO>();
         }
     }
 }

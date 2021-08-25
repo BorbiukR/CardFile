@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CardFile.BLL.Interfaces
@@ -16,7 +14,5 @@ namespace CardFile.BLL.Interfaces
         Task UpdateAsync(TModel model);
 
         Task DeleteByIdAsync(int modelId);
-
-        IEnumerable<TModel> GetCardFilesByСriteria(Expression<Func<TModel, bool>> expression);
     }
 }

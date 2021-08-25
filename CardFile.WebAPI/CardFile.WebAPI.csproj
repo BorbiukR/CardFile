@@ -31,4 +31,8 @@
     <ProjectReference Include="..\CardFile.Identity\CardFile.Identity.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="StaticFiles\Text\" />
+  </ItemGroup>
+
 </Project>

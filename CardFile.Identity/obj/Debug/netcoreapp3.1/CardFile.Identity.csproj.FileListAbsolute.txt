@@ -1,0 +1,15 @@
+C:\Users\user\source\repos\CardFile\CardFile.Identity\bin\Debug\netcoreapp3.1\CardFile.Identity.deps.json
+C:\Users\user\source\repos\CardFile\CardFile.Identity\bin\Debug\netcoreapp3.1\CardFile.Identity.runtimeconfig.json
+C:\Users\user\source\repos\CardFile\CardFile.Identity\bin\Debug\netcoreapp3.1\CardFile.Identity.runtimeconfig.dev.json
+C:\Users\user\source\repos\CardFile\CardFile.Identity\bin\Debug\netcoreapp3.1\CardFile.Identity.dll
+C:\Users\user\source\repos\CardFile\CardFile.Identity\bin\Debug\netcoreapp3.1\CardFile.Identity.pdb
+C:\Users\user\source\repos\CardFile\CardFile.Identity\bin\Debug\netcoreapp3.1\CardFile.DAL.dll
+C:\Users\user\source\repos\CardFile\CardFile.Identity\bin\Debug\netcoreapp3.1\CardFile.DAL.pdb
+C:\Users\user\source\repos\CardFile\CardFile.Identity\obj\Debug\netcoreapp3.1\CardFile.Identity.csprojAssemblyReference.cache
+C:\Users\user\source\repos\CardFile\CardFile.Identity\obj\Debug\netcoreapp3.1\CardFile.Identity.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\CardFile\CardFile.Identity\obj\Debug\netcoreapp3.1\CardFile.Identity.AssemblyInfo.cs
+C:\Users\user\source\repos\CardFile\CardFile.Identity\obj\Debug\netcoreapp3.1\CardFile.Identity.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\CardFile\CardFile.Identity\obj\Debug\netcoreapp3.1\CardFile.Identity.csproj.CopyComplete
+C:\Users\user\source\repos\CardFile\CardFile.Identity\obj\Debug\netcoreapp3.1\CardFile.Identity.dll
+C:\Users\user\source\repos\CardFile\CardFile.Identity\obj\Debug\netcoreapp3.1\CardFile.Identity.pdb
+C:\Users\user\source\repos\CardFile\CardFile.Identity\obj\Debug\netcoreapp3.1\CardFile.Identity.genruntimeconfig.cache

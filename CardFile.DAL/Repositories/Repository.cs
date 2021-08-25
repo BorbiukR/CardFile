@@ -1,8 +1,6 @@
 ﻿using CardFile.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace CardFile.DAL.Repositories
@@ -32,8 +30,5 @@ namespace CardFile.DAL.Repositories
         }
 
         public void Update(T entity) => _cardFileDbContext.Set<T>().Update(entity);
-
-        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression) =>
-            _cardFileDbContext.Set<T>().Where(expression);
     }
 }

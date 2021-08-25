@@ -6,7 +6,7 @@ namespace CardFile.DAL
 {
     public class CardFileIdentityDbContext : IdentityDbContext<IdentityUser>
     {
-        public CardFileIdentityDbContext(DbContextOptions options) : base(options)
+        public CardFileIdentityDbContext(DbContextOptions<CardFileIdentityDbContext> options) : base(options)
         {
             
         }
