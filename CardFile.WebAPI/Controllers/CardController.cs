@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using CardFile.BLL.DTO;
+using CardFile.BLL.Interfaces;
+using CardFile.WebAPI.Contracts.Request;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CardFile.WebAPI.Controllers
 {
@@ -11,6 +12,30 @@ namespace CardFile.WebAPI.Controllers
     [ApiController]
     public class CardController : ControllerBase
     {
-        
+        private readonly ICardFileService _cardFileService;
+        private readonly IMapper _mapper;
+
+        public CardController(ICardFileService cardFileService, IMapper mapper)
+        {
+            _cardFileService = cardFileService;
+            _mapper = mapper;
+        }
+
+        [HttpPost("upload")]
+        public IActionResult Upload(IFormFile formFiles, [FromQuery]CardFileRequest request)  
+        {
+            try
+            {
+                var mappedCardFile = _mapper.Map<CardFileDTO>(request);
+
+                _cardFileService.AddCardFileAsync(formFiles, mappedCardFile);
+
+                return Ok(new { formFiles.FileName, });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using CardFile.BLL.DTO;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CardFile.BLL.Interfaces
 {
@@ -10,8 +12,6 @@ namespace CardFile.BLL.Interfaces
 
         IEnumerable<CardFileDTO> GetCardsByLanguage(string language);
 
-        void Download(string path, string fileName);
-
-        void Upload(int id, CardFileDTO model);
+        Task AddCardFileAsync(IFormFile uploadedFile, CardFileDTO cardFile);
     }
 }

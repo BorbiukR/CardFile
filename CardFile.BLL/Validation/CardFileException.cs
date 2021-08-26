@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace CardFile.BLL.Validation
 {
     public class CardFileException : Exception

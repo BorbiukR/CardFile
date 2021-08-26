@@ -7,7 +7,7 @@ namespace CardFile.DAL.Repositories
 {
     public abstract class Repository<T> : IRepository<T> where T : class
     {
-        protected internal readonly CardFileDbContext _cardFileDbContext;
+        public readonly CardFileDbContext _cardFileDbContext;
 
         public Repository(CardFileDbContext context)
         {

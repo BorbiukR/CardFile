@@ -19,7 +19,7 @@ namespace CardFile.DAL.Migrations.CardFileDb
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CardFile.DAL.Entities.CardTextFile", b =>
+            modelBuilder.Entity("CardFile.DAL.Entities.CardFileEntitie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

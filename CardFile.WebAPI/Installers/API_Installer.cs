@@ -1,6 +1,13 @@
-﻿using CardFile.WebAPI.Interfaces;
+﻿using AutoMapper;
+using CardFile.BLL.Interfaces;
+using CardFile.BLL.MappingProfiles;
+using CardFile.BLL.Services;
+using CardFile.DAL;
+using CardFile.WebAPI.Interfaces;
+using CardFile.WebAPI.MappingProfiles;
 using CardFile.WebAPI.Services;
 using CardFile.WebAPI.Settings;
+using Data.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,10 +48,22 @@ namespace CardFile.WebAPI.Installers
                 options.TokenValidationParameters = tokenValidationParameters;
             });
 
-            services.AddAutoMapper(typeof(Startup));
-
+           
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICardFileService, CardFileService>();
             services.AddScoped<IUserService, UserService>();
             services.AddTransient<IMailService, SendGridMailService>();
+            
+            services.AddAutoMapper(typeof(Startup));
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new BLLAutomapperProfile());
+                mc.AddProfile(new PLAutomapperProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddControllers();
             services.AddRazorPages();

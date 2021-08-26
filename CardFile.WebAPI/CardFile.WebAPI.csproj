@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="StaticFiles\Text\" />
+    <Folder Include="wwwroot\Files\" />
   </ItemGroup>
 
 </Project>
