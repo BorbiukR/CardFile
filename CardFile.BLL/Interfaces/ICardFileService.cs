@@ -13,5 +13,9 @@ namespace CardFile.BLL.Interfaces
         IEnumerable<CardFileDTO> GetCardsByLanguage(string language);
 
         Task AddCardFileAsync(IFormFile uploadedFile, CardFileDTO cardFile);
+
+        Task<bool> UpdateCardFileAsync(IFormFile uploadedFile, CardFileDTO cardFile);
+
+        Task<bool> UserOwnsCardFileAsync(int cardFileId, string getUserId);
     }
 }

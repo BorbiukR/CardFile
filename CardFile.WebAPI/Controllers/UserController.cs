@@ -24,8 +24,8 @@ namespace CardFile.WebAPI.Controllers
         private readonly IConfiguration _configuration;
 
         public UserController(IUserService userService,
-                                  IMailService mailService,
-                                  IConfiguration configuration)
+                              IMailService mailService,
+                              IConfiguration configuration)
         {
             _userService = userService;
             _mailService = mailService;

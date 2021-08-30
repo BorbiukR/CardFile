@@ -293,7 +293,7 @@ namespace CardFile.WebAPI.Services
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.Add(_jwtSettings.TokenLifetime),
-                SigningCredentials =
+                SigningCredentials = 
                     new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 

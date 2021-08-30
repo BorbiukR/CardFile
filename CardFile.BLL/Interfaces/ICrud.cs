@@ -9,6 +9,6 @@ namespace CardFile.BLL.Interfaces
 
         Task<TModel> GetByIdAsync(int id);
 
-        Task DeleteByIdAsync(int modelId);
+        Task<bool> DeleteByIdAsync(int modelId);
     }
 }

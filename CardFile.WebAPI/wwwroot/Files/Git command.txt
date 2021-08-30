@@ -1,0 +1,51 @@
+cd 	-відкрити папку
+cd.. 	-вернутися на папку назад
+dir 	-подивитися вміст папки
+clear 	-очищає
+
+git 					- показує всі команди гіта
+git clone [link] 			- скачує репозиторій на пк у вказану папку
+git remote add [shortname] [url]   	- добавити репозиторій
+git fetch [remote-name]			- отримати зміни із віддаленого репозиторія 
+git push [remote-name] [branch-name]  	- відправка змін у віддалений репозиторій
+
+git status 				-показує статус файлів
+git add [файл,який добавляєш]		-добавляє один файл
+git add -A  				-добавляє всі файли		
+git commit -m "комент"			-комітим
+git push				-пушим
+
+git rm [filename]  			-видаляєм файли
+
+git pull 				-отримати файли
+git reset				-відміняє всі незафіксовані файли	
+
+git push --set-upstream origin master
+
+
+git init
+git commit -m "комент"
+git remote add origin https://github.com/BorbiukR/CardFile.git
+git branch -M main
+git push -u origin [main] (пушить в гілку)
+
+git branch			- показати всі гілки
+git checkout -b [branch_name] 	- створює нову гілку
+aбо
+git branch [branch_name]
+git branch -d [branch_name] 	- видаляє гілку
+
+git checkout [branch_name]	- переключає на гілку master 
+git merge [branch_name]		- вливає зміни
+
+git mergetool			- проводить по конфліктах
+git remote 			- показує віддалені репозиторії 
+git remote -v   		- подивитися адреси для читання і запису прив'язані до репозиторія
+
+git remote show origin 		- показує url для fetch і push
+git tag [name]			- добавляє тег
+git push --tags			- пушить із тегами
+git log 			- показує останні комміти та його автора
+git show [унікальний хеш коміта]- деталі про конкретний комміт
+git show HEAD			- деталі про останній в системі комміт
+git revert [назва]		- вериає до попереднього стану комміта

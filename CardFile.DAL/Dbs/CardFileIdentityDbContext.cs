@@ -13,7 +13,7 @@ namespace CardFile.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=IdintityCardFileAPI;Trusted_Connection=True;");
+            //optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=IdintityCardFileAPI;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

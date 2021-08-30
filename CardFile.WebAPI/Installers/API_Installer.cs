@@ -48,7 +48,6 @@ namespace CardFile.WebAPI.Installers
                 options.TokenValidationParameters = tokenValidationParameters;
             });
 
-           
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICardFileService, CardFileService>();
             services.AddScoped<IUserService, UserService>();

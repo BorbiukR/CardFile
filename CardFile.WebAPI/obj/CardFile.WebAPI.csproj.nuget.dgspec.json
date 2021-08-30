@@ -30,6 +30,9 @@
             "projectReferences": {
               "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.DAL\\CardFile.DAL.csproj": {
                 "projectPath": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.DAL\\CardFile.DAL.csproj"
+              },
+              "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Identity\\CardFile.Identity.csproj": {
+                "projectPath": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Identity\\CardFile.Identity.csproj"
               }
             }
           }
@@ -47,10 +50,6 @@
             "AutoMapper": {
               "target": "Package",
               "version": "[10.1.1, )"
-            },
-            "Azure.Storage.Blobs": {
-              "target": "Package",
-              "version": "[12.9.1, )"
             }
           },
           "imports": [

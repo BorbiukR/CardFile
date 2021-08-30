@@ -1,0 +1,64 @@
+CREATE DATABASE [DBname]		-- створює таблицю
+USE [DBname]; 				-- використання таблиці
+DROP DATABASE [DBname]			-- видаляє таблицю
+
+CREATE TABLE Customers
+(
+    Id INT PRIMARY KEY IDENTITY,				-- робить праймері ключем
+    Age INT DEFAULT 18 CHECK(Age >0 AND Age < 100), 		-- DEFAULT встановлює значення 18, якщо не було нічого вказано	
+								-- CHECK задає параметри перевірки					
+    FirstName NVARCHAR(20),
+    LastName NVARCHAR(20) NULL,		-- може бути нуль
+    Email VARCHAR(30) NOT NULL,		--не може бути нуль
+    Phone VARCHAR(20) UNIQUE,   	-- робиться унікальним, два значення не можна встановити
+    PRIMARY KEY(Id)			-- ставиться праймері ключем
+)
+
+CREATE TABLE Orders				-- звязвки в SQL
+(
+    Id INT PRIMARY KEY IDENTITY,
+    CustomerId INT REFERENCES Customers (Id),
+    CreatedAt Date
+);
+
+EXEC sp_rename 'Users', 'UserAccounts';	-- перейменовує	
+
+ALTER TABLE Customers
+ADD Address NVARCHAR(50) NULL;		-- добавляє стовбець в таблиці
+
+ALTER TABLE Customers
+DROP COLUMN Address;			-- видаляє стовбець в таблиці
+
+ALTER TABLE Customers
+ALTER COLUMN FirstName NVARCHAR(200);	-- міняє стовбець
+
+INSERT Products VALUES ('iPhone 7', 'Apple', 5, 52000) 		-- добавляє дані в таблицю по параметрам
+VALUES
+() 								-- в дужках можна додати багато рядків
+
+SELECT ProductName
+FROM Products
+ORDER BY ProductName DESC		--сортує по зменшенню
+ORDER BY ProductName ASC		--сортує по збільшенню
+
+SELECT * FROM Products
+WHERE Manufacturer = 'Samsung'		--вибирає значення, які =
+
+UPDATE Products				--апдейтим 
+SET Manufacturer = 'Samsung Inc.'
+WHERE Manufacturer = 'Samsung'
+
+DELETE Products				--видаляєм
+WHERE Id=9
+
+SELECT * FROM CUSTOMERS 
+WHERE SALARY LIKE '200%'; 		-- допомагє зробити додатковий пошук
+
+AVG: находит среднее значение
+SUM: находит сумму значений
+MIN: находит наименьшее значение
+MAX: находит наибольшее значение
+COUNT: находит количество строк в запросе
+
+SELECT DISTINCT SALARY FROM CUSTOMERS 	-- не показує дані,які повторюються
+   ORDER BY SALARY 

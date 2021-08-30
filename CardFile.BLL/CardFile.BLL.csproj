@@ -6,11 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="Azure.Storage.Blobs" Version="12.9.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CardFile.DAL\CardFile.DAL.csproj" />
+    <ProjectReference Include="..\CardFile.Identity\CardFile.Identity.csproj" />
   </ItemGroup>
 
 </Project>

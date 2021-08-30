@@ -14,14 +14,14 @@ namespace CardFile.DAL
             
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CardFileAPI;Trusted_Connection=True;");
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+           // optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CardFileAPI;Trusted_Connection=True;");
+        }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
