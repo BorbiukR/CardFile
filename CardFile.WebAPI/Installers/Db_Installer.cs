@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CardFile.WebAPI.Installers
 {
-    public class DbInstaller : IInstaller
+    public class Db_Installer : IInstaller
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {

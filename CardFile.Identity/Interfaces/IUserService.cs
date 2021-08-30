@@ -16,5 +16,7 @@ namespace CardFile.WebAPI.Interfaces
         Task<AuthenticationResult> ForgetPasswordAsync(string email);
 
         Task<AuthenticationResult> ResetPasswordAsync(ResetPasswordRequest model);
+
+        Task<AuthenticationResult> RefreshTokenAsync(string token, string refreshToken);
     }
 }

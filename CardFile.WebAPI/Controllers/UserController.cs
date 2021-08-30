@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using CardFile.WebAPI.Contracts.Request;
 using CardFile.WebAPI.Interfaces;
 using CardFile.WebAPI.Models;
 using CardFile.WebAPI.Models.Request;
@@ -57,7 +58,7 @@ namespace CardFile.WebAPI.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> LoginAsync([FromBody]UserLoginRequest model)
+        public async Task<IActionResult> LoginAsync([FromBody] UserLoginRequest model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(new AuthFailedResponse
@@ -66,17 +67,37 @@ namespace CardFile.WebAPI.Controllers
                 });
 
             var authResponse = await _userService.LoginUserAsync(model);
-            
+
             if (!authResponse.Success)
                 return BadRequest(new AuthFailedResponse
                 {
                     Errors = authResponse.Errors
                 });
-            
+
             string content = "<h1>Hey!, new login to your account noticed</h1>" +
                              "<p>New login to your account at " + DateTime.Now + "</p>";
 
             await _mailService.SendEmailAsync(model.Email, "New login", content);
+
+            return Ok(new AuthSuccessResponse
+            {
+                Token = authResponse.Token,
+                RefreshToken = authResponse.RefreshToken
+            });
+        }
+
+        [HttpPost("refresh")]
+        public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequest request)
+        {
+            var authResponse = await _userService.RefreshTokenAsync(request.Token, request.RefreshToken);
+
+            if (!authResponse.Success)
+            {
+                return BadRequest(new AuthFailedResponse
+                {
+                    Errors = authResponse.Errors
+                });
+            }
 
             return Ok(new AuthSuccessResponse
             {

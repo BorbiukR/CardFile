@@ -1,4 +1,5 @@
 ﻿using CardFile.DAL;
+using CardFile.DAL.Models;
 using CardFile.WebAPI.Domain;
 using CardFile.WebAPI.Interfaces;
 using CardFile.WebAPI.Models;
@@ -6,6 +7,7 @@ using CardFile.WebAPI.Models.Request;
 using CardFile.WebAPI.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -114,6 +116,53 @@ namespace CardFile.WebAPI.Services
             return await GenerateAuthenticationResultForUserAsync(user);
         }
 
+        public async Task<AuthenticationResult> RefreshTokenAsync(string token, string refreshToken)
+        {
+            var validatedToken = GetPrincipalFromToken(token);
+
+            if (validatedToken == null)
+                return new AuthenticationResult { Errors = new[] {"Invalid Token"} };
+
+            var expiryDateUnix = 
+                long.Parse(validatedToken.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Exp).Value);
+
+            var expiryDateTimeUtc = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)
+                .AddSeconds(expiryDateUnix);
+
+            if (expiryDateTimeUtc > DateTime.UtcNow)
+                return new AuthenticationResult { Errors = new[] {"This token hasn't expired yet"} };
+
+            var jti = validatedToken.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
+
+            var storedRefreshToken = await _cardFileIdentityDbContext
+                .RefreshTokens.SingleOrDefaultAsync(x => x.Token == refreshToken);
+
+            if (storedRefreshToken == null)
+                return new AuthenticationResult { Errors = new[] {"This refresh token does not exist"} };
+
+            if (DateTime.UtcNow > storedRefreshToken.ExpiryDate)
+                return new AuthenticationResult { Errors = new[] {"This refresh token has expired"} };
+
+            if (storedRefreshToken.Invalidated)
+                return new AuthenticationResult { Errors = new[] {"This refresh token has been invalidated"} };
+
+            if (storedRefreshToken.Used)
+                return new AuthenticationResult { Errors = new[] {"This refresh token has been used"} };
+
+            if (storedRefreshToken.JwtId != jti)
+                return new AuthenticationResult { Errors = new[] {"This refresh token does not match this JWT"} };
+
+            storedRefreshToken.Used = true;
+
+            _cardFileIdentityDbContext.RefreshTokens.Update(storedRefreshToken);
+            await _cardFileIdentityDbContext.SaveChangesAsync();
+
+            var user = await _userManager
+                .FindByIdAsync(validatedToken.Claims.Single(x => x.Type == "id").Value);
+
+            return await GenerateAuthenticationResultForUserAsync(user);
+        }
+
         public async Task<AuthenticationResult> ConfirmEmailAsync(string userId, string token)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -212,6 +261,11 @@ namespace CardFile.WebAPI.Services
             };
         }
 
+        /// <summary>
+        /// Helper method to validate token
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
         private ClaimsPrincipal GetPrincipalFromToken(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -219,14 +273,14 @@ namespace CardFile.WebAPI.Services
             try
             {
                 var tokenValidationParameters = _tokenValidationParameters.Clone();
-                tokenValidationParameters.ValidateLifetime = false;
-                var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out var validatedToken);
-                if (!IsJwtWithValidSecurityAlgorithm(validatedToken))
-                {
-                    return null;
-                }
 
-                return principal;
+                tokenValidationParameters.ValidateLifetime = false;
+          
+                var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out var validatedToken);
+               
+                return !IsJwtWithValidSecurityAlgorithm(validatedToken)
+                    ? null
+                    : principal;
             }
             catch
             {
@@ -234,6 +288,11 @@ namespace CardFile.WebAPI.Services
             }
         }
 
+        /// <summary>
+        /// Chech if type of the key is valid
+        /// </summary>
+        /// <param name="validatedToken"></param>
+        /// <returns></returns>
         private bool IsJwtWithValidSecurityAlgorithm(SecurityToken validatedToken)
         {
             return (validatedToken is JwtSecurityToken jwtSecurityToken) &&
@@ -293,29 +352,29 @@ namespace CardFile.WebAPI.Services
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.Add(_jwtSettings.TokenLifetime),
-                SigningCredentials = 
-                    new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), 
+                                                            SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            //var refreshToken = new RefreshToken
-            //{
-            //    JwtId = token.Id,
-            //    UserId = user.Id,
-            //    CreationDate = DateTime.UtcNow,
-            //    ExpiryDate = DateTime.UtcNow.AddMonths(6)
-            //};
+            var refreshToken = new RefreshToken
+            {
+                JwtId = token.Id,
+                UserId = user.Id,
+                CreationDate = DateTime.UtcNow,
+                ExpiryDate = DateTime.UtcNow.AddMonths(6)
+            };
 
-            //await _context.RefreshTokens.AddAsync(refreshToken);
-            //await _context.SaveChangesAsync();
+            await _cardFileIdentityDbContext.RefreshTokens.AddAsync(refreshToken);
+            await _cardFileIdentityDbContext.SaveChangesAsync();
 
             return new AuthenticationResult
             {
                 Success = true,
                 Token = tokenHandler.WriteToken(token),
-                //RefreshToken = refreshToken.Token
+                RefreshToken = refreshToken.Token
             };
-        }      
+        }
     }
 }

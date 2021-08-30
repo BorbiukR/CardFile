@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace CardFile.WebAPI.Installers
 {
-    public class SwaggerInstaller : IInstaller
+    public class Swagger_Installer : IInstaller
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
