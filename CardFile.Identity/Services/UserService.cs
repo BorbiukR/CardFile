@@ -25,7 +25,7 @@ namespace CardFile.WebAPI.Services
         private readonly IConfiguration _configuration;
         private readonly IMailService _mailService;
         private readonly JwtSettings _jwtSettings;
-        private readonly CardFileIdentityDbContext _cardFileIdentityDbContext;
+        private readonly CardFileDbContext _cardFileIdentityDbContext;
         private readonly TokenValidationParameters _tokenValidationParameters;
 
         public UserService(UserManager<IdentityUser> userManager,
@@ -33,7 +33,7 @@ namespace CardFile.WebAPI.Services
                            IConfiguration configuration, 
                            IMailService mailService,
                            JwtSettings jwtSettings,
-                           CardFileIdentityDbContext context,
+                           CardFileDbContext context,
                            TokenValidationParameters tokenValidationParameters)
         {
             _userManager = userManager;

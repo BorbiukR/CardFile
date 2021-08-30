@@ -1,9 +1,11 @@
 ﻿using CardFile.DAL.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CardFile.DAL
 {
-    public class CardFileDbContext : DbContext
+    public class CardFileDbContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<CardFileEntitie> CardTextFiles { get; set; }
 
@@ -14,10 +16,10 @@ namespace CardFile.DAL
             
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-           // optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CardFileAPI;Trusted_Connection=True;");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //   optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=CardFileAPI;Trusted_Connection=True;");
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

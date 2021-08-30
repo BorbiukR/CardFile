@@ -33,7 +33,7 @@ namespace CardFile.BLL.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public Task AddCardFileAsync(IFormFile uploadedFile, CardFileDTO cardFile)
+        public async Task<bool> AddCardFileAsync(IFormFile uploadedFile, CardFileDTO cardFile)
         {
             if (uploadedFile == null)
                 throw new CardFileException("Уou cannot add a file.");
@@ -63,19 +63,24 @@ namespace CardFile.BLL.Services
 
             var mappedFile = _mapper.Map<CardFileEntitie>(cardFile);
 
-            _unitOfWork.CardTextFileRepository.AddAsync(mappedFile);
-            return _unitOfWork.SaveAsync();
+            await _unitOfWork.CardTextFileRepository.AddAsync(mappedFile);
+            var added = await _unitOfWork.SaveAsync();
+            return added > 0;
         }
 
-        public async Task<bool> UpdateCardFileAsync(IFormFile uploadedFile, CardFileDTO cardFile)
+        public async Task<bool> UpdateCardFileAsync(int cardFileId, IFormFile uploadedFile, CardFileDTO cardFile)
         {
             if (uploadedFile == null)
                 throw new CardFileException("Уou cannot add a file.");
 
-            var userOwnsCardFile = await UserOwnsCardFileAsync(cardFile.Id, _httpContextAccessor.GetUserId());
+            var userOwnsCardFile = await UserOwnsCardFileAsync(cardFileId, _httpContextAccessor.GetUserId());
 
             if (!userOwnsCardFile)
                 throw new CardFileException("Уou do not own this card file.");
+
+            var mappedFile = _mapper.Map<CardFileEntitie>(cardFile);
+
+            mappedFile = await _unitOfWork.CardTextFileRepository.GetByIdAsync(cardFileId);
 
             string path = "/Files/" + uploadedFile.FileName;
 
@@ -84,17 +89,17 @@ namespace CardFile.BLL.Services
                 uploadedFile.CopyTo(stream);
             }
 
-            cardFile.FileName = uploadedFile.FileName;
-            cardFile.Path = path;
+            mappedFile.FileName = uploadedFile.FileName;
+            mappedFile.Path = path;
+            mappedFile.Description = cardFile.Description;
+            mappedFile.Language = cardFile.Language;
 
-            if (string.IsNullOrEmpty(cardFile.FileName))
+            if (string.IsNullOrEmpty(mappedFile.FileName))
                 throw new CardFileException("Уou cannot add a card. File Name is null or empty");
-            if (string.IsNullOrEmpty(cardFile.Path))
+            if (string.IsNullOrEmpty(mappedFile.Path))
                 throw new CardFileException("Уou cannot add a card. Path is null or empty");
-            if (cardFile.DateOfCreation > DateTime.Now || cardFile.DateOfCreation < new DateTime(2021, 8, 23))
+            if (mappedFile.DateOfCreation > DateTime.Now || mappedFile.DateOfCreation < new DateTime(2021, 8, 23))
                 throw new CardFileException("Уou cannot add a card. DateOfCreation is incorrect");
-
-            var mappedFile = _mapper.Map<CardFileEntitie>(cardFile);
 
             _unitOfWork.CardTextFileRepository.Update(mappedFile);
             var updated = await _unitOfWork.SaveAsync();

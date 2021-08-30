@@ -10,11 +10,8 @@ namespace CardFile.WebAPI.Installers
     {
         public void InstallServices(IServiceCollection services, IConfiguration configuration)
         {
-            string connectionForMainDb = configuration.GetConnectionString("CardFileAPI");
-            services.AddDbContext<CardFileDbContext>(options => options.UseSqlServer(connectionForMainDb));
-
-            string connectionForIdentityDb = configuration.GetConnectionString("IdintityCardFileAPI");
-            services.AddDbContext<CardFileIdentityDbContext>(options => options.UseSqlServer(connectionForIdentityDb));
+            string connection= configuration.GetConnectionString("CardFile");
+            services.AddDbContext<CardFileDbContext>(options => options.UseSqlServer(connection));
 
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
@@ -24,7 +21,7 @@ namespace CardFile.WebAPI.Installers
                 options.Password.RequiredLength = 5;
                 options.User.RequireUniqueEmail = true;
 
-            }).AddEntityFrameworkStores<CardFileIdentityDbContext>()
+            }).AddEntityFrameworkStores<CardFileDbContext>()
               .AddDefaultTokenProviders();
         }
     }

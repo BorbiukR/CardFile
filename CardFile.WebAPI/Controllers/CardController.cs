@@ -43,13 +43,13 @@ namespace CardFile.WebAPI.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult UpdateCardFile(IFormFile formFiles, [FromQuery] CardFileRequest request)
+        public async Task<IActionResult> UpdateCardFile(int cardFileId, IFormFile formFiles, [FromQuery] CardFileRequest request)
         {
             try
             {
                 var mappedCardFile = _mapper.Map<CardFileDTO>(request);
 
-                _cardFileService.UpdateCardFileAsync(formFiles, mappedCardFile);
+                await _cardFileService.UpdateCardFileAsync(cardFileId, formFiles, mappedCardFile);
 
                 return Ok(new { formFiles.FileName });
             }
