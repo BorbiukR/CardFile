@@ -27,6 +27,7 @@
           "AutoMapper": "10.1.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "8.1.1",
           "CardFile.BLL": "1.0.0",
+          "CardFile.Contracts": "1.0.0",
           "CardFile.DAL": "1.0.0",
           "CardFile.Identity": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.18",
@@ -1670,6 +1671,14 @@
           "CardFile.BLL.dll": {}
         }
       },
+      "CardFile.Contracts/1.0.0": {
+        "runtime": {
+          "CardFile.Contracts.dll": {}
+        },
+        "compile": {
+          "CardFile.Contracts.dll": {}
+        }
+      },
       "CardFile.DAL/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Identity": "2.2.0",
@@ -1687,6 +1696,7 @@
       },
       "CardFile.Identity/1.0.0": {
         "dependencies": {
+          "CardFile.Contracts": "1.0.0",
           "CardFile.DAL": "1.0.0",
           "Microsoft.AspNetCore.Authentication": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.18",
@@ -4245,6 +4255,11 @@
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
     },
     "CardFile.BLL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CardFile.Contracts/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

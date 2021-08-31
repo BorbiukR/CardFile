@@ -90,3 +90,5 @@ C:\Users\user\source\repos\CardFile\CardFile.WebAPI\obj\Debug\netcoreapp3.1\Card
 C:\Users\user\source\repos\CardFile\CardFile.WebAPI\obj\Debug\netcoreapp3.1\CardFile.WebAPI.dll
 C:\Users\user\source\repos\CardFile\CardFile.WebAPI\obj\Debug\netcoreapp3.1\CardFile.WebAPI.pdb
 C:\Users\user\source\repos\CardFile\CardFile.WebAPI\obj\Debug\netcoreapp3.1\CardFile.WebAPI.genruntimeconfig.cache
+C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\CardFile.Contracts.dll
+C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\CardFile.Contracts.pdb

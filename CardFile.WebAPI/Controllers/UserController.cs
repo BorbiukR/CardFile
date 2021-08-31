@@ -11,11 +11,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace CardFile.WebAPI.Controllers
 {
-    // TODO : додивитися як покращити Identity в туторіалах
-    // в контроллер, щоб зробити аутентифікацію
-    // [Authorize(Role = "Admin")]
-    // var userId = User.FindFirst(ClaimTypes.NameIdentifier);
-
     [Route("api/identity")]
     [ApiController]
     public class UserController : ControllerBase

@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 
 namespace CardFile.WebAPI.Controllers
 {
+    // TODO:  переробити try catch 
+    // TODO: розібратися із форматом DataTime 
     [ApiController]
     [Route("api/card")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]  
@@ -26,6 +28,7 @@ namespace CardFile.WebAPI.Controllers
         }
 
         [HttpPost("create")]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateCardFile(IFormFile formFiles, [FromQuery]CardFileRequest request)  
         {
             try
@@ -43,6 +46,7 @@ namespace CardFile.WebAPI.Controllers
         }
 
         [HttpPut("update")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateCardFile(int cardFileId, IFormFile formFiles, [FromQuery] CardFileRequest request)
         {
             try
@@ -60,6 +64,7 @@ namespace CardFile.WebAPI.Controllers
         }
 
         [HttpDelete("delete")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCardFileById(int cardFileId)
         {
             try
@@ -91,7 +96,7 @@ namespace CardFile.WebAPI.Controllers
         }
 
         [HttpGet("getById")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> GetCardFileByIdAsync(int id)
         {
             try
@@ -107,7 +112,7 @@ namespace CardFile.WebAPI.Controllers
         }
 
         [HttpGet("getByDateOfCreation")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin,User")]
         public IActionResult GetCardFilesByDateOfCreation(DateTime dateTime)
         {
             try
@@ -123,7 +128,7 @@ namespace CardFile.WebAPI.Controllers
         }
 
         [HttpGet("getByLanguage")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin,User")]
         public IActionResult GetCardFilesByLanguage(string language)
         {
             try

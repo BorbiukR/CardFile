@@ -5,6 +5,10 @@ namespace CardFile.DAL.Repositories
 {
     public class CardTextFileRepository : Repository<CardFileEntitie>, ICardTextFileRepository
     {
-        public CardTextFileRepository(CardFileDbContext cardFileDbContext) : base(cardFileDbContext) { }
+        public CardTextFileRepository(CardFileDbContext cardFileDbContext) 
+            : base(cardFileDbContext) 
+        { 
+
+        }
     }
 }

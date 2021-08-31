@@ -1,0 +1,60 @@
+Add-Migration [name]
+Update-database
+
+Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=helloappdb;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer  - табилці з БД переводить в моделі
+
+[NotMapped] - свойство не буде будуватися в бд
+[Key] - робить ключем
+[Index("PhoneNumber", IsUnique =true] - робить уныкальним
+[DatabaseGenerated(DatabaseGeneratedOption.Identity)] - автогенерація Id
+[DatabaseGenerated(DatabaseGeneratedOption.None)] - відключає автогенерація Id
+[MaxLength(50)]
+[Column(TypeName = "varchar(200)")]
+
+
+конфігурації Fluent API можна виносити в окрмеы класи і застосовати в OnModelCreating через  modelBuilder.ApplyConfiguration(new клас);
+або виносити в окрмемі методи в класі context modelBuilder.Entity<клас таблиці>(метод);
+
+var users = db.Users.Include(u=>u.Company).ToList();	- жадна загрузка LEFT JOIN
+
+Company company = db.Companies.FirstOrDefault();
+db.Users.Where(p=>p.CompanyId==company.Id).Load();	-явную загрузку
+
+db.Entry(company).Collection(t=>t.Users).Load(); навигационное свойство представляет коллекцию		
+db.Entry(user).Reference(x => x.Company).Load(); навигационное свойство представляет одиночный объект
+
+Lazy loading или ленивая загрузка
+Microsoft.EntityFrameworkCore.Proxies	- нугет
+
+LINQ
+
+var users = db.Users.Where(p => EF.Functions.Like(p.Name, "%Tom%"));			- like v sql
+var users = db.Users.Where(p=> p.Company.Name=="Google");
+var user = db.Users.FirstOrDefault(p=>p.Id==3);				-получают первый элемент выборки, который соответствует определенному условию или набору условий
+
+var users = db.Users.Select(p => new { Name = p.Name,
+                    		       Age = p.Age,
+                    		       Company = p.Company.Name });
+
+var users = db.Users.OrderBy(p=>p.Name);
+var users = db.Users.OrderByDescending(u=>u.Name);
+var users = db.Users.OrderBy(u => u.Age).ThenBy(u=>u.Company.Name);
+
+var users = db.Users.Where(u => u.Age < 30)
+    .Union(db.Users.Where(u=>u.Name.Contains("Tom")));
+
+var users = db.Users.Where(u => u.Age > 30)
+    .Intersect(db.Users.Where(u=>u.Name.Contains("Tom")));
+
+bool result = db.Users.Any(u=>u.Company.Name=="Google");
+bool result = db.Users.All(u=>u.Company.Name=="Microsoft");
+
+int number2 = db.Users.Count(u => u.Name.Contains("Tom"));
+int minAge = db.Users.Min(u=>u.Age);
+int maxAge = db.Users.Max(u=>u.Age);
+
+double avgAge = db.Users.Where(u=>u.Company.Name=="Microsoft")
+                        .Average(p => p.Age);
+
+int sum2 = db.Users.Where(u=>u.Company.Name == "Microsoft")
+                   .Sum(u => u.Age);

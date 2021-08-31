@@ -22,13 +22,13 @@ namespace CardFile.DAL.Repositories
 
         public async Task<T> GetByIdAsync(int id) => await _cardFileDbContext.Set<T>().FindAsync(id);
 
+        public void Update(T entity) => _cardFileDbContext.Set<T>().Update(entity);
+
         public async Task DeleteByIdAsync(int id)
         {
             var res = await _cardFileDbContext.Set<T>().FindAsync(id);
 
             _cardFileDbContext.Set<T>().Remove(res);
-        }
-
-        public void Update(T entity) => _cardFileDbContext.Set<T>().Update(entity);
+        }    
     }
 }

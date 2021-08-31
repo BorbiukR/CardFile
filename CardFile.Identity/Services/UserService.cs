@@ -20,6 +20,8 @@ using System.Threading.Tasks;
 
 namespace CardFile.WebAPI.Services
 {
+    // TODO : розібратися із підтвердженням емейла
+    // TODO : зробити xml комента на GenerateAuthenticationResultForUserAsync
     public class UserService : IUserService
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -261,6 +263,21 @@ namespace CardFile.WebAPI.Services
             };
         }
 
+        public async Task ConfirmEmailAsync(IdentityUser newUser)
+        {
+            var confirmEmailToken = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
+
+            var encodedEmailToken = Encoding.UTF8.GetBytes(confirmEmailToken);
+            var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
+
+            string url = $"{_configuration["AppUrl"]}/api/auth/confirmemail?userid={newUser.Id}&token={validEmailToken}";
+
+            string content = $"<h1>Welcome to Card File Application</h1> <p>Please " +
+                             $"confirm your email by <a href='{url}'>Clicking here</a></p>";
+
+            await _mailService.SendEmailAsync(newUser.Email, "Confirm your email", content);
+        }
+
         /// <summary>
         /// Helper method to validate token
         /// </summary>
@@ -300,21 +317,6 @@ namespace CardFile.WebAPI.Services
                        StringComparison.InvariantCultureIgnoreCase);
         }
 
-        private async Task ConfirmEmailAsync(IdentityUser newUser)
-        {
-            var confirmEmailToken = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
-
-            var encodedEmailToken = Encoding.UTF8.GetBytes(confirmEmailToken);
-            var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
-
-            string url = $"{_configuration["AppUrl"]}/api/auth/confirmemail?userid={newUser.Id}&token={validEmailToken}";
-
-            string content = $"<h1>Welcome to Card File Application</h1> <p>Please " +
-                             $"confirm your email by <a href='{url}'>Clicking here</a></p>";
-
-            await _mailService.SendEmailAsync(newUser.Email, "Confirm your email", content);
-        }
-
         private async Task<AuthenticationResult> GenerateAuthenticationResultForUserAsync(IdentityUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -331,22 +333,22 @@ namespace CardFile.WebAPI.Services
             var userClaims = await _userManager.GetClaimsAsync(user);
             claims.AddRange(userClaims);
 
-            //var userRoles = await _userManager.GetRolesAsync(user);
-            //foreach (var userRole in userRoles)
-            //{
-            //    claims.Add(new Claim(ClaimTypes.Role, userRole));
-            //    var role = await _roleManager.FindByNameAsync(userRole);
-            //    if (role == null) continue;
-            //    var roleClaims = await _roleManager.GetClaimsAsync(role);
+            var userRoles = await _userManager.GetRolesAsync(user);
+            foreach (var userRole in userRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, userRole));
+                var role = await _roleManager.FindByNameAsync(userRole);
+                if (role == null) continue;
+                var roleClaims = await _roleManager.GetClaimsAsync(role);
 
-            //    foreach (var roleClaim in roleClaims)
-            //    {
-            //        if (claims.Contains(roleClaim))
-            //            continue;
+                foreach (var roleClaim in roleClaims)
+                {
+                    if (claims.Contains(roleClaim))
+                        continue;
 
-            //        claims.Add(roleClaim);
-            //    }
-            //}
+                    claims.Add(roleClaim);
+                }
+            }
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
