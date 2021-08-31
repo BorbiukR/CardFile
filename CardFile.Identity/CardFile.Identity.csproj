@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CardFile.Contracts\CardFile.Contracts.csproj" />
     <ProjectReference Include="..\CardFile.DAL\CardFile.DAL.csproj" />
   </ItemGroup>
 

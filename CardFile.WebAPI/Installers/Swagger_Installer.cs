@@ -24,10 +24,9 @@ namespace CardFile.WebAPI.Installers
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {new OpenApiSecurityScheme{Reference = new OpenApiReference
-                    {
-                        Id = "Bearer",
-                        Type = ReferenceType.SecurityScheme
-                    }}, new List<string>()}
+                        { Id = "Bearer", Type = ReferenceType.SecurityScheme } }, 
+                        new List<string>()
+                    }
                 });
             });
         }

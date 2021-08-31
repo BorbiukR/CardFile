@@ -1902,6 +1902,16 @@
           "bin/placeholder/CardFile.BLL.dll": {}
         }
       },
+      "CardFile.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/CardFile.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CardFile.Contracts.dll": {}
+        }
+      },
       "CardFile.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -1923,6 +1933,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
+          "CardFile.Contracts": "1.0.0",
           "CardFile.DAL": "1.0.0",
           "Microsoft.AspNetCore.Authentication": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.18",
@@ -6521,6 +6532,11 @@
       "path": "../CardFile.BLL/CardFile.BLL.csproj",
       "msbuildProject": "../CardFile.BLL/CardFile.BLL.csproj"
     },
+    "CardFile.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../CardFile.Contracts/CardFile.Contracts.csproj",
+      "msbuildProject": "../CardFile.Contracts/CardFile.Contracts.csproj"
+    },
     "CardFile.DAL/1.0.0": {
       "type": "project",
       "path": "../CardFile.DAL/CardFile.DAL.csproj",
@@ -6537,6 +6553,7 @@
       "AutoMapper >= 10.1.1",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 8.1.1",
       "CardFile.BLL >= 1.0.0",
+      "CardFile.Contracts >= 1.0.0",
       "CardFile.DAL >= 1.0.0",
       "CardFile.Identity >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 3.1.18",
@@ -6580,6 +6597,9 @@
           "projectReferences": {
             "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.BLL\\CardFile.BLL.csproj": {
               "projectPath": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.BLL\\CardFile.BLL.csproj"
+            },
+            "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Contracts\\CardFile.Contracts.csproj": {
+              "projectPath": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Contracts\\CardFile.Contracts.csproj"
             },
             "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.DAL\\CardFile.DAL.csproj": {
               "projectPath": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.DAL\\CardFile.DAL.csproj"

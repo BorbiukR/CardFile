@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CardFile.BLL\CardFile.BLL.csproj" />
+    <ProjectReference Include="..\CardFile.Contracts\CardFile.Contracts.csproj" />
     <ProjectReference Include="..\CardFile.DAL\CardFile.DAL.csproj" />
     <ProjectReference Include="..\CardFile.Identity\CardFile.Identity.csproj" />
   </ItemGroup>

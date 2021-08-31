@@ -1868,6 +1868,16 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "CardFile.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/CardFile.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CardFile.Contracts.dll": {}
+        }
+      },
       "CardFile.DAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -1889,6 +1899,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
+          "CardFile.Contracts": "1.0.0",
           "CardFile.DAL": "1.0.0",
           "Microsoft.AspNetCore.Authentication": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.18",
@@ -6588,6 +6599,11 @@
         "system.xml.xmlserializer.4.3.0.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "CardFile.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../CardFile.Contracts/CardFile.Contracts.csproj",
+      "msbuildProject": "../CardFile.Contracts/CardFile.Contracts.csproj"
     },
     "CardFile.DAL/1.0.0": {
       "type": "project",
