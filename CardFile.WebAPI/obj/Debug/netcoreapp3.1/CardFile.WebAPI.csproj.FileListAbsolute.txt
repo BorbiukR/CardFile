@@ -63,9 +63,11 @@ C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\runt
 C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\CardFile.BLL.dll
+C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\CardFile.Contracts.dll
 C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\CardFile.DAL.dll
 C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\CardFile.Identity.dll
 C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\CardFile.BLL.pdb
+C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\CardFile.Contracts.pdb
 C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\CardFile.DAL.pdb
 C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\CardFile.Identity.pdb
 C:\Users\user\source\repos\CardFile\CardFile.WebAPI\obj\Debug\netcoreapp3.1\CardFile.WebAPI.csprojAssemblyReference.cache
@@ -90,5 +92,10 @@ C:\Users\user\source\repos\CardFile\CardFile.WebAPI\obj\Debug\netcoreapp3.1\Card
 C:\Users\user\source\repos\CardFile\CardFile.WebAPI\obj\Debug\netcoreapp3.1\CardFile.WebAPI.dll
 C:\Users\user\source\repos\CardFile\CardFile.WebAPI\obj\Debug\netcoreapp3.1\CardFile.WebAPI.pdb
 C:\Users\user\source\repos\CardFile\CardFile.WebAPI\obj\Debug\netcoreapp3.1\CardFile.WebAPI.genruntimeconfig.cache
-C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\CardFile.Contracts.dll
-C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\CardFile.Contracts.pdb
+C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\CardFile.WebAPI.xml
+C:\Users\user\source\repos\CardFile\CardFile.WebAPI\obj\Debug\netcoreapp3.1\CardFile.WebAPI.xml
+C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\Scrutor.dll
+C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Filters.dll
+C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Filters.Abstractions.dll
+C:\Users\user\source\repos\CardFile\CardFile.WebAPI\bin\Debug\netcoreapp3.1\System.Text.Json.dll

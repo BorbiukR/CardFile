@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CardFile.BLL.DTO;
+using CardFile.Contracts.Response;
 using CardFile.WebAPI.Contracts.Request;
 
 namespace CardFile.WebAPI.MappingProfiles
@@ -9,6 +10,7 @@ namespace CardFile.WebAPI.MappingProfiles
         public PLAutomapperProfile()
         {          
             CreateMap<CardFileRequest, CardFileDTO>().ReverseMap();
+            CreateMap<CardFileResponse, CardFileDTO>().ReverseMap();
         }       
     }
 }

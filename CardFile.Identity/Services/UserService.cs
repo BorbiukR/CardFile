@@ -6,7 +6,6 @@ using CardFile.WebAPI.Models;
 using CardFile.WebAPI.Models.Request;
 using CardFile.WebAPI.Settings;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -20,8 +19,6 @@ using System.Threading.Tasks;
 
 namespace CardFile.WebAPI.Services
 {
-    // TODO : розібратися із підтвердженням емейла
-    // TODO : зробити xml комента на GenerateAuthenticationResultForUserAsync
     public class UserService : IUserService
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -81,6 +78,7 @@ namespace CardFile.WebAPI.Services
             };
 
             var createdUser = await _userManager.CreateAsync(newUser, model.Password);
+            await _userManager.AddToRoleAsync(newUser, "User");
 
             if (!createdUser.Succeeded)
                 return new AuthenticationResult
@@ -90,7 +88,7 @@ namespace CardFile.WebAPI.Services
                     Errors = createdUser.Errors.Select(e => e.Description)
                 };
 
-            //await ConfirmEmailAsync(newUser);
+            await ConfirmEmailAsync(newUser.Id);
 
             return await GenerateAuthenticationResultForUserAsync(newUser);     
         }
@@ -165,9 +163,10 @@ namespace CardFile.WebAPI.Services
             return await GenerateAuthenticationResultForUserAsync(user);
         }
 
-        public async Task<AuthenticationResult> ConfirmEmailAsync(string userId, string token)
+        public async Task<AuthenticationResult> ConfirmEmailAsync(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
             if (user == null)
                 return new AuthenticationResult
@@ -176,10 +175,9 @@ namespace CardFile.WebAPI.Services
                     Message = "User not found"
                 };
 
-            var decodedToken = WebEncoders.Base64UrlDecode(token);
-            string normalToken = Encoding.UTF8.GetString(decodedToken);
+            var result = await _userManager.ConfirmEmailAsync(user, token);
 
-            var result = await _userManager.ConfirmEmailAsync(user, normalToken);
+            await ConfirmEmailHelper(user, token);
 
             if (result.Succeeded)
                 return new AuthenticationResult
@@ -208,10 +206,8 @@ namespace CardFile.WebAPI.Services
                 };
 
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var encodedToken = Encoding.UTF8.GetBytes(token);
-            var validToken = WebEncoders.Base64UrlEncode(encodedToken);
 
-            string url = $"{_configuration["AppUrl"]}/ResetPassword?email={email}&token={validToken}";
+            string url = $"{_configuration["AppUrl"]}/ResetPassword?email={email}&token={token}";
 
             string content = "<h1>Follow the instructions to reset your password</h1>" +
                              $"<p>To reset your password <a href='{url}'>Click here</a></p>";
@@ -243,10 +239,7 @@ namespace CardFile.WebAPI.Services
                     Message = "Password doesn't match its confirmation",
                 };
 
-            var decodedToken = WebEncoders.Base64UrlDecode(model.Token);
-            string validToken = Encoding.UTF8.GetString(decodedToken);
-
-            var result = await _userManager.ResetPasswordAsync(user, validToken, model.NewPassword);
+            var result = await _userManager.ResetPasswordAsync(user, model.Token, model.NewPassword);
 
             if (result.Succeeded)
                 return new AuthenticationResult
@@ -263,19 +256,14 @@ namespace CardFile.WebAPI.Services
             };
         }
 
-        public async Task ConfirmEmailAsync(IdentityUser newUser)
+        private async Task ConfirmEmailHelper(IdentityUser user, string token)
         {
-            var confirmEmailToken = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
-
-            var encodedEmailToken = Encoding.UTF8.GetBytes(confirmEmailToken);
-            var validEmailToken = WebEncoders.Base64UrlEncode(encodedEmailToken);
-
-            string url = $"{_configuration["AppUrl"]}/api/auth/confirmemail?userid={newUser.Id}&token={validEmailToken}";
+            string url = $"{_configuration["AppUrl"]}/api/auth/confirmemail?userid={user.Id}&token={token}";
 
             string content = $"<h1>Welcome to Card File Application</h1> <p>Please " +
                              $"confirm your email by <a href='{url}'>Clicking here</a></p>";
 
-            await _mailService.SendEmailAsync(newUser.Email, "Confirm your email", content);
+            await _mailService.SendEmailAsync(user.Email, "Confirm your email", content);
         }
 
         /// <summary>
@@ -337,8 +325,12 @@ namespace CardFile.WebAPI.Services
             foreach (var userRole in userRoles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, userRole));
+                
                 var role = await _roleManager.FindByNameAsync(userRole);
-                if (role == null) continue;
+                
+                if (role == null) 
+                    continue;
+
                 var roleClaims = await _roleManager.GetClaimsAsync(role);
 
                 foreach (var roleClaim in roleClaims)

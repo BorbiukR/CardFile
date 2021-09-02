@@ -1,7 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 
 namespace CardFile.WebAPI.Installers
 {
@@ -12,6 +16,8 @@ namespace CardFile.WebAPI.Installers
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CardFile.WebAPI", Version = "v1" });
+
+                c.ExampleFilters();
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
@@ -28,7 +34,13 @@ namespace CardFile.WebAPI.Installers
                         new List<string>()
                     }
                 });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
+
+            services.AddSwaggerExamplesFromAssemblyOf<Startup>();
         }
     }
 }

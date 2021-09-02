@@ -28,6 +28,11 @@ namespace CardFile.WebAPI.Controllers
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Register new user
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync([FromBody] UserRegistrationRequest model)
         {
@@ -52,6 +57,11 @@ namespace CardFile.WebAPI.Controllers
             });
         }
 
+        /// <summary>
+        /// Login to the system
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync([FromBody] UserLoginRequest model)
         {
@@ -81,6 +91,11 @@ namespace CardFile.WebAPI.Controllers
             });
         }
 
+        /// <summary>
+        /// Refresh token for user
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost("refresh")]
         public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequest request)
         {
@@ -101,13 +116,18 @@ namespace CardFile.WebAPI.Controllers
             });
         }
 
+        /// <summary>
+        /// Confirm user email
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         [HttpGet("confirmEmail")]
-        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        public async Task<IActionResult> ConfirmEmail(string userId)
         {
-            if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(token))
+            if (string.IsNullOrWhiteSpace(userId) )
                 return NotFound();
 
-            var result = await _userService.ConfirmEmailAsync(userId, token);
+            var result = await _userService.ConfirmEmailAsync(userId);
 
             if(result.Success)
                 return Redirect($"{_configuration["AppUrl"]}/ConfirmEmail.html");
@@ -115,6 +135,11 @@ namespace CardFile.WebAPI.Controllers
             return BadRequest(result);
         }
 
+        /// <summary>
+        /// Send email to reset password for user
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpPost("forgetPassword")]
         public async Task<IActionResult> ForgetPassword(string email)
         {
@@ -129,6 +154,11 @@ namespace CardFile.WebAPI.Controllers
             return BadRequest(result); 
         }
 
+        /// <summary>
+        /// Reset password
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost("resetPassword")]
         public async Task<IActionResult> ResetPassword([FromForm]ResetPasswordRequest model)
         {

@@ -21,7 +21,7 @@ namespace CardFile.WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.InstallServicesInAssembly(Configuration);         
+            services.InstallServicesInAssembly(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

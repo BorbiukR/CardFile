@@ -11,7 +11,7 @@ namespace CardFile.WebAPI.Interfaces
 
         Task<AuthenticationResult> LoginUserAsync(UserLoginRequest model);
 
-        Task<AuthenticationResult> ConfirmEmailAsync(string userId, string token);
+        Task<AuthenticationResult> ConfirmEmailAsync(string userId);
 
         Task<AuthenticationResult> ForgetPasswordAsync(string email);
 

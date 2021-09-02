@@ -1,10 +1,12 @@
 C:\Users\user\source\repos\CardFile\CardFile.BLL\bin\Debug\netcoreapp3.1\CardFile.BLL.deps.json
 C:\Users\user\source\repos\CardFile\CardFile.BLL\bin\Debug\netcoreapp3.1\CardFile.BLL.dll
 C:\Users\user\source\repos\CardFile\CardFile.BLL\bin\Debug\netcoreapp3.1\CardFile.BLL.pdb
+C:\Users\user\source\repos\CardFile\CardFile.BLL\bin\Debug\netcoreapp3.1\CardFile.Contracts.dll
 C:\Users\user\source\repos\CardFile\CardFile.BLL\bin\Debug\netcoreapp3.1\CardFile.DAL.dll
 C:\Users\user\source\repos\CardFile\CardFile.BLL\bin\Debug\netcoreapp3.1\CardFile.Identity.dll
 C:\Users\user\source\repos\CardFile\CardFile.BLL\bin\Debug\netcoreapp3.1\CardFile.DAL.pdb
 C:\Users\user\source\repos\CardFile\CardFile.BLL\bin\Debug\netcoreapp3.1\CardFile.Identity.pdb
+C:\Users\user\source\repos\CardFile\CardFile.BLL\bin\Debug\netcoreapp3.1\CardFile.Contracts.pdb
 C:\Users\user\source\repos\CardFile\CardFile.BLL\obj\Debug\netcoreapp3.1\CardFile.BLL.csprojAssemblyReference.cache
 C:\Users\user\source\repos\CardFile\CardFile.BLL\obj\Debug\netcoreapp3.1\CardFile.BLL.AssemblyInfoInputs.cache
 C:\Users\user\source\repos\CardFile\CardFile.BLL\obj\Debug\netcoreapp3.1\CardFile.BLL.AssemblyInfo.cs
@@ -12,5 +14,3 @@ C:\Users\user\source\repos\CardFile\CardFile.BLL\obj\Debug\netcoreapp3.1\CardFil
 C:\Users\user\source\repos\CardFile\CardFile.BLL\obj\Debug\netcoreapp3.1\CardFile.BLL.csproj.CopyComplete
 C:\Users\user\source\repos\CardFile\CardFile.BLL\obj\Debug\netcoreapp3.1\CardFile.BLL.dll
 C:\Users\user\source\repos\CardFile\CardFile.BLL\obj\Debug\netcoreapp3.1\CardFile.BLL.pdb
-C:\Users\user\source\repos\CardFile\CardFile.BLL\bin\Debug\netcoreapp3.1\CardFile.Contracts.dll
-C:\Users\user\source\repos\CardFile\CardFile.BLL\bin\Debug\netcoreapp3.1\CardFile.Contracts.pdb
