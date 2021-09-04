@@ -8,14 +8,14 @@ namespace CardFile.DAL
     public class UnitOfWork : IUnitOfWork
     {
         private readonly CardFileDbContext _cardFileDbContext;
-        private ICardTextFileRepository _files;
+        private ICardFileRepository _files;
 
         public UnitOfWork(CardFileDbContext context)
         {
             _cardFileDbContext = context;
         }
 
-        public ICardTextFileRepository CardTextFileRepository
+        public ICardFileRepository CardFileRepository
         {
             get
             {

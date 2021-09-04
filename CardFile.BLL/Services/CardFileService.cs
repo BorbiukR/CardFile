@@ -56,7 +56,7 @@ namespace CardFile.BLL.Services
             
             var mappedFile = _mapper.Map<CardFileEntitie>(cardFile);
 
-            await _unitOfWork.CardTextFileRepository.AddAsync(mappedFile);
+            await _unitOfWork.CardFileRepository.AddAsync(mappedFile);
             var added = await _unitOfWork.SaveAsync();
             return added > 0;
         }
@@ -71,7 +71,7 @@ namespace CardFile.BLL.Services
             if (uploadedFile == null)
                 throw new CardFileException("Уou cannot add a file.");
 
-            var  mappedFile = await _unitOfWork.CardTextFileRepository.GetByIdAsync(cardFileId);
+            var  mappedFile = await _unitOfWork.CardFileRepository.GetByIdAsync(cardFileId);
 
             string path = "/Files/" + uploadedFile.FileName;
 
@@ -85,7 +85,7 @@ namespace CardFile.BLL.Services
             mappedFile.Description = cardFile.Description;
             mappedFile.Language = cardFile.Language;
 
-            _unitOfWork.CardTextFileRepository.Update(mappedFile);
+            _unitOfWork.CardFileRepository.Update(mappedFile);
             var updated = await _unitOfWork.SaveAsync();
             return updated > 0;
         }
@@ -100,14 +100,14 @@ namespace CardFile.BLL.Services
             if (!userOwnsCardFile)
                 throw new CardFileException("Уou do not own this card file.");
 
-            var cardFile = await _unitOfWork.CardTextFileRepository.GetByIdAsync(cardFileId);
+            var cardFile = await _unitOfWork.CardFileRepository.GetByIdAsync(cardFileId);
 
             string fullPathToCardFile = _hostingEnvironment.WebRootPath + cardFile.Path;
 
             if (File.Exists(fullPathToCardFile))
                 File.Delete(fullPathToCardFile);
 
-            await _unitOfWork.CardTextFileRepository.DeleteByIdAsync(cardFileId);
+            await _unitOfWork.CardFileRepository.DeleteByIdAsync(cardFileId);
             var deleted = await _unitOfWork.SaveAsync();
             return deleted > 0;
         }
@@ -115,7 +115,7 @@ namespace CardFile.BLL.Services
         public async Task<bool> UserOwnsCardFileAsync(int cardFileId, string userId)
         {
             var cardFiles = await Task.Run(() => 
-                _unitOfWork.CardTextFileRepository.FindAll().SingleOrDefault(x => x.Id == cardFileId));
+                _unitOfWork.CardFileRepository.FindAll().SingleOrDefault(x => x.Id == cardFileId));
 
             return cardFiles == null || cardFiles.UserId != userId
                 ? false
@@ -124,14 +124,14 @@ namespace CardFile.BLL.Services
 
         public IEnumerable<CardFileDTO> GetAll()
         {
-            var cards = _unitOfWork.CardTextFileRepository.FindAll().ToList();
+            var cards = _unitOfWork.CardFileRepository.FindAll().ToList();
 
             return _mapper.Map<IEnumerable<CardFileDTO>>(cards);
         }
 
         public async Task<CardFileDTO> GetByIdAsync(int id)
         {
-            var card = await _unitOfWork.CardTextFileRepository.GetByIdAsync(id);
+            var card = await _unitOfWork.CardFileRepository.GetByIdAsync(id);
 
             if (card == null)
                 throw new CardFileException("Уou cannot get a card. Card Id is null or empty");
@@ -141,7 +141,7 @@ namespace CardFile.BLL.Services
 
         public IEnumerable<CardFileDTO> GetCardsByDateOfCreation(DateTime dateTime)
         {
-            var cards = _unitOfWork.CardTextFileRepository.FindAll().Where(x => x.DateOfCreation == dateTime);
+            var cards = _unitOfWork.CardFileRepository.FindAll().Where(x => x.DateOfCreation == dateTime);
 
             if (cards == null)
                 throw new CardFileException("Уou cannot get cards. Cards are null");
@@ -151,7 +151,7 @@ namespace CardFile.BLL.Services
 
         public IEnumerable<CardFileDTO> GetCardsByLanguage(string language)
         {
-            var cards = _unitOfWork.CardTextFileRepository.FindAll().Where(x => x.Language == language);
+            var cards = _unitOfWork.CardFileRepository.FindAll().Where(x => x.Language == language);
 
             if (cards == null)
                 throw new CardFileException("Уou cannot get cards. Cards are null");
@@ -161,22 +161,20 @@ namespace CardFile.BLL.Services
 
         public async Task<FileStream> DownloadСardFileById(int cardFileId)
         {
-            var cardFile = await _unitOfWork.CardTextFileRepository.GetByIdAsync(cardFileId);
+            var cardFile = await _unitOfWork.CardFileRepository.GetByIdAsync(cardFileId);
 
             string fullPathToCardFile = _hostingEnvironment.WebRootPath + cardFile.Path;
-            
+
             if (!File.Exists(fullPathToCardFile))
                 throw new CardFileException("File is not exsist");
-             
+
             var userOwnsCardFile = await UserOwnsCardFileAsync(cardFileId, _httpContextAccessor.GetUserId());
 
             if (!userOwnsCardFile)
                 throw new CardFileException("Уou do not own this card file.");
 
-            using (var file = File.OpenRead(fullPathToCardFile))
-            {
-                return file;
-            }
-        }
+            var file = File.OpenRead(fullPathToCardFile);
+            return file;           
+        }    
     }
 }

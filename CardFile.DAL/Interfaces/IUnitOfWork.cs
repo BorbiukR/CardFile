@@ -5,7 +5,7 @@ namespace Data.Interfaces
 {
     public interface IUnitOfWork 
     {
-        ICardTextFileRepository CardTextFileRepository { get; }
+        ICardFileRepository CardFileRepository { get; }
         
         Task<int> SaveAsync();
     }

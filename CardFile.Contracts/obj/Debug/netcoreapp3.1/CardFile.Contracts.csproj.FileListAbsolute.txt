@@ -1,7 +1,6 @@
 C:\Users\user\source\repos\CardFile\CardFile.Contracts\bin\Debug\netcoreapp3.1\CardFile.Contracts.deps.json
 C:\Users\user\source\repos\CardFile\CardFile.Contracts\bin\Debug\netcoreapp3.1\CardFile.Contracts.dll
 C:\Users\user\source\repos\CardFile\CardFile.Contracts\bin\Debug\netcoreapp3.1\CardFile.Contracts.pdb
-C:\Users\user\source\repos\CardFile\CardFile.Contracts\obj\Debug\netcoreapp3.1\CardFile.Contracts.csprojAssemblyReference.cache
 C:\Users\user\source\repos\CardFile\CardFile.Contracts\obj\Debug\netcoreapp3.1\CardFile.Contracts.AssemblyInfoInputs.cache
 C:\Users\user\source\repos\CardFile\CardFile.Contracts\obj\Debug\netcoreapp3.1\CardFile.Contracts.AssemblyInfo.cs
 C:\Users\user\source\repos\CardFile\CardFile.Contracts\obj\Debug\netcoreapp3.1\CardFile.Contracts.csproj.CoreCompileInputs.cache

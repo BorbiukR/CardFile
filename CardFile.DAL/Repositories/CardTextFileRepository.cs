@@ -3,7 +3,7 @@ using CardFile.DAL.Interfaces;
 
 namespace CardFile.DAL.Repositories
 {
-    public class CardTextFileRepository : Repository<CardFileEntitie>, ICardTextFileRepository
+    public class CardTextFileRepository : Repository<CardFileEntitie>, ICardFileRepository
     {
         public CardTextFileRepository(CardFileDbContext cardFileDbContext) 
             : base(cardFileDbContext) 
