@@ -15,8 +15,6 @@ using CardFile.Identity.Extensions;
 
 namespace CardFile.BLL.Services
 {
-    // TODO: при delete не видаляється файл в wwwroot, лише шлях в бд
-    // TODO: при get, має бути можливість скачати документ
     public class CardFileService : ICardFileService
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -102,6 +100,13 @@ namespace CardFile.BLL.Services
             if (!userOwnsCardFile)
                 throw new CardFileException("Уou do not own this card file.");
 
+            var cardFile = await _unitOfWork.CardTextFileRepository.GetByIdAsync(cardFileId);
+
+            string fullPathToCardFile = _hostingEnvironment.WebRootPath + cardFile.Path;
+
+            if (File.Exists(fullPathToCardFile))
+                File.Delete(fullPathToCardFile);
+
             await _unitOfWork.CardTextFileRepository.DeleteByIdAsync(cardFileId);
             var deleted = await _unitOfWork.SaveAsync();
             return deleted > 0;
@@ -152,6 +157,26 @@ namespace CardFile.BLL.Services
                 throw new CardFileException("Уou cannot get cards. Cards are null");
 
             return _mapper.Map<IEnumerable<CardFileDTO>>(cards);
+        }
+
+        public async Task<FileStream> DownloadСardFileById(int cardFileId)
+        {
+            var cardFile = await _unitOfWork.CardTextFileRepository.GetByIdAsync(cardFileId);
+
+            string fullPathToCardFile = _hostingEnvironment.WebRootPath + cardFile.Path;
+            
+            if (!File.Exists(fullPathToCardFile))
+                throw new CardFileException("File is not exsist");
+             
+            var userOwnsCardFile = await UserOwnsCardFileAsync(cardFileId, _httpContextAccessor.GetUserId());
+
+            if (!userOwnsCardFile)
+                throw new CardFileException("Уou do not own this card file.");
+
+            using (var file = File.OpenRead(fullPathToCardFile))
+            {
+                return file;
+            }
         }
     }
 }

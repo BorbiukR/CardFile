@@ -8,7 +8,7 @@ namespace CardFile.DAL
 {
     public class CardFileDbContext : IdentityDbContext<IdentityUser>
     {
-        public DbSet<CardFileEntitie> CardTextFiles { get; set; }
+        public DbSet<CardFileEntitie> CardFiles { get; set; }
 
         public DbSet<RefreshToken> RefreshTokens { get; set; }
 

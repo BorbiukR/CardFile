@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 namespace CardFile.WebAPI.Controllers
 {
     // TODO: переробити формат часу (день, місяць, рік)
+    // GetCardFilesByDateOfCreation - не працює коректно 
     [ApiController]
     [Route("api")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -34,7 +35,6 @@ namespace CardFile.WebAPI.Controllers
         /// </summary>
         /// <param name="formFiles"></param>
         /// <param name="request"></param>
-        /// <returns></returns>
         /// <response code="200">Created a card in the system</response>
         /// <response code="400">Unable to create a card due to validation error</response>
         /// <response code="401">Unauthorized</response>
@@ -52,7 +52,7 @@ namespace CardFile.WebAPI.Controllers
 
             await _cardFileService.AddCardFileAsync(formFiles, mappedCardFile);
 
-            return Ok(new { formFiles.FileName });
+            return Ok("Successfully created");
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace CardFile.WebAPI.Controllers
 
             await _cardFileService.UpdateCardFileAsync(cardFileId, formFiles, mappedCardFile);
 
-            return Ok(new { formFiles.FileName });
+            return Ok("Successfully updated");
 
         }
 
@@ -178,6 +178,24 @@ namespace CardFile.WebAPI.Controllers
                 return NotFound();
 
             return Ok(mappedCardFiles);
+        }
+
+        /// <summary>
+        /// Download file by card id
+        /// </summary>
+        /// <param name="cardFileId"></param>
+        /// <response code="200">Download file</response>
+        /// <response code="404">Not Found any file</response>
+        /// <response code="401">Unauthorized</response>
+        [HttpGet("file/{cardFileId}")]
+        //[Authorize(Roles = "Admin,User")]
+        public async Task<IActionResult> DownloadFileById(int cardFileId)
+        {
+            var file = await _cardFileService.DownloadСardFileById(cardFileId);
+
+            if (file == null) NotFound();
+
+            return Ok(file);
         }
     }
 }

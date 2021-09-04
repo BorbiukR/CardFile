@@ -22,6 +22,7 @@ namespace CardFile.WebAPI.Installers
         {
             var jwtSettings = new JwtSettings();
             configuration.Bind(nameof(jwtSettings), jwtSettings);
+
             services.AddSingleton(jwtSettings);
 
             var tokenValidationParameters = new TokenValidationParameters
@@ -62,6 +63,7 @@ namespace CardFile.WebAPI.Installers
             });
 
             IMapper mapper = mapperConfig.CreateMapper();
+
             services.AddSingleton(mapper);
 
             services.AddControllers();

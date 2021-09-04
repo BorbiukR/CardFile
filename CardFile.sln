@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardFile.DAL", "CardFile.DA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardFile.Identity", "CardFile.Identity\CardFile.Identity.csproj", "{C32CC659-2C13-416A-9F87-C1E4B4C6B7E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardFile.Contracts", "CardFile.Contracts\CardFile.Contracts.csproj", "{526E04C6-47B9-421A-87CE-2AF18E1260A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardFile.Contracts", "CardFile.Contracts\CardFile.Contracts.csproj", "{526E04C6-47B9-421A-87CE-2AF18E1260A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardFile.Tests", "CardFile.Tests\CardFile.Tests.csproj", "{4F2D4DE4-43FA-4AFD-9A7A-2A4F04FC6780}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{526E04C6-47B9-421A-87CE-2AF18E1260A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{526E04C6-47B9-421A-87CE-2AF18E1260A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{526E04C6-47B9-421A-87CE-2AF18E1260A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F2D4DE4-43FA-4AFD-9A7A-2A4F04FC6780}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F2D4DE4-43FA-4AFD-9A7A-2A4F04FC6780}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F2D4DE4-43FA-4AFD-9A7A-2A4F04FC6780}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F2D4DE4-43FA-4AFD-9A7A-2A4F04FC6780}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
