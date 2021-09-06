@@ -14,8 +14,6 @@ using System.Threading.Tasks;
 
 namespace CardFile.WebAPI.Controllers
 {
-    // TODO: переробити формат часу (день, місяць, рік)
-    // GetCardFilesByDateOfCreation - не працює коректно 
     [ApiController]
     [Route("api")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -147,8 +145,9 @@ namespace CardFile.WebAPI.Controllers
         /// <response code="200">Get all card files</response>
         /// <response code="404">Not Found any card files</response>
         /// <response code="401">Unauthorized</response>
-        [HttpGet("cards/dateTime")]
-        [Authorize(Roles = "Admin,User")]
+        [HttpGet("cards/dateTime/{dateTime}")]
+        //[Authorize(Roles = "Admin,User")]
+        [AllowAnonymous]
         public IActionResult GetCardFilesByDateOfCreation(DateTime dateTime)
         {
             var cardFiles = _cardFileService.GetCardsByDateOfCreation(dateTime);
@@ -167,7 +166,7 @@ namespace CardFile.WebAPI.Controllers
         /// <response code="200">Get all card files</response>
         /// <response code="404">Not Found any card files</response>
         /// <response code="401">Unauthorized</response>
-        [HttpGet("cards/language")]
+        [HttpGet("cards/language/{language}")]
         [Authorize(Roles = "Admin,User")]
         public IActionResult GetCardFilesByLanguage(string language)
         {

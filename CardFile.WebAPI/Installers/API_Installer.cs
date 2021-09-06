@@ -67,6 +67,7 @@ namespace CardFile.WebAPI.Installers
             services.AddSingleton(mapper);
 
             services.AddControllers();
+
             services.AddRazorPages();
         }
     }

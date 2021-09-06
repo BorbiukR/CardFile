@@ -171,10 +171,10 @@ namespace CardFile.BLL.Services
             var userOwnsCardFile = await UserOwnsCardFileAsync(cardFileId, _httpContextAccessor.GetUserId());
 
             if (!userOwnsCardFile)
-                throw new CardFileException("Уou do not own this card file.");
+                throw new CardFileException("Уou do not own this file.");
 
             var file = File.OpenRead(fullPathToCardFile);
             return file;           
-        }    
+        }
     }
 }
