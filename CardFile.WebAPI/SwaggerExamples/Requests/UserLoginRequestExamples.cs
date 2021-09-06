@@ -9,7 +9,7 @@ namespace CardFile.WebAPI.SwaggerExamples.Requests
         {
             return new UserLoginRequest
             {
-                Email = "borbiuk@gmail.com",
+                Email = "orbiuk.r@gmail.com",
                 Password = "Aa/1234"
             };
         }

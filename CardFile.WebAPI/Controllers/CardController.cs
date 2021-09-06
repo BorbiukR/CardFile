@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CardFile.WebAPI.Controllers
@@ -107,9 +109,9 @@ namespace CardFile.WebAPI.Controllers
         /// <response code="401">Unauthorized</response>
         [HttpGet("cards")]
         [AllowAnonymous]
-        public IActionResult GetAllCardFiles()
+        public IActionResult GetAllCardFiles(CancellationToken cancellationToken)
         {
-            var cardFiles = _cardFileService.GetAll();
+            var cardFiles = _cardFileService.GetAll(cancellationToken);
             var mappedCardFiles = _mapper.Map<List<CardFileResponse>>(cardFiles);
 
             if (cardFiles == null || mappedCardFiles == null)
@@ -188,13 +190,13 @@ namespace CardFile.WebAPI.Controllers
         /// <response code="401">Unauthorized</response>
         [HttpGet("file/{cardFileId}")]
         [Authorize(Roles = "Admin,User")]
-        public async Task<IActionResult> DownloadFileById(int cardFileId)
+        public async Task<IActionResult> DownloadFile(int cardFileId)
         {
-            var file = await _cardFileService.DownloadСardFileById(cardFileId);
+            var filePath = await _cardFileService.GetFilePath(cardFileId);
 
-            if (file == null) NotFound();
+            var bytes = await System.IO.File.ReadAllBytesAsync(filePath);
 
-            return Ok(file);
+            return File(bytes, "text/plain", Path.GetFileName(filePath));
         }
     }
 }

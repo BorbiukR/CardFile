@@ -69,7 +69,7 @@
             <response code="404">Not Found any card files</response>
             <response code="401">Unauthorized</response>
         </member>
-        <member name="M:CardFile.WebAPI.Controllers.CardController.DownloadFileById(System.Int32)">
+        <member name="M:CardFile.WebAPI.Controllers.CardController.DownloadFile(System.Int32)">
             <summary>
             Download file by card id
             </summary>
