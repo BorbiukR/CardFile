@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,11 +24,13 @@ namespace CardFile.WebAPI.Controllers
     {
         private readonly ICardFileService _cardFileService;
         private readonly IMapper _mapper;
+        private readonly ILogger<CardController> _logger;
 
-        public CardController(ICardFileService cardFileService, IMapper mapper)
+        public CardController(ICardFileService cardFileService, IMapper mapper, ILogger<CardController> logger)
         {
             _cardFileService = cardFileService;
             _mapper = mapper;
+            _logger = logger;
         }
 
         /// <summary>
@@ -43,7 +46,11 @@ namespace CardFile.WebAPI.Controllers
         public async Task<IActionResult> CreateCardFile(IFormFile formFiles, [FromQuery] CardFileRequest request)
         {
             if (formFiles == null)
-                return BadRequest("file can not be load");
+            {
+                _logger.LogWarning("File not be load, not correct format");
+                return BadRequest("File can not be load");
+            }
+                
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.Values.SelectMany(x => x.Errors.Select(c => c.ErrorMessage)));

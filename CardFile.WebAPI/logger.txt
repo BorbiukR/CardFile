@@ -1,0 +1,17 @@
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+File not be load, not correct format
+InformationApplication started. Press Ctrl+C to shut down.
+9/7/2021 9:29:20 PMInformationHosting environment: Development
+9/7/2021 9:29:20 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/7/2021 9:29:20 PMWarningFile not be load, not correct format
+9/7/2021 9:29:55 PMInformation Application started. Press Ctrl+C to shut down.
+9/7/2021 9:31:45 PMInformation Hosting environment: Development
+9/7/2021 9:31:45 PMInformation Content root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/7/2021 9:31:45 PMWarning File not be load, not correct format
+9/7/2021 9:32:06 PMInformation Application started. Press Ctrl+C to shut down. 
+ 9/7/2021 9:33:29 PMInformation Hosting environment: Development 
+ 9/7/2021 9:33:29 PMInformation Content root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI 
+ 9/7/2021 9:33:29 PMWarning File not be load, not correct format 
+ 9/7/2021 9:33:55 PM
