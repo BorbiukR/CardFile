@@ -39,7 +39,7 @@ namespace CardFile.WebAPI.Controllers
         /// <response code="400">Unable to create a card due to validation error</response>
         /// <response code="401">Unauthorized</response>
         [HttpPost("card")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> CreateCardFile(IFormFile formFiles, [FromQuery] CardFileRequest request)
         {
             if (formFiles == null)
@@ -148,8 +148,7 @@ namespace CardFile.WebAPI.Controllers
         /// <response code="404">Not Found any card files</response>
         /// <response code="401">Unauthorized</response>
         [HttpGet("cards/dateTime/{dateTime}")]
-        //[Authorize(Roles = "Admin,User")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin,User")]
         public IActionResult GetCardFilesByDateOfCreation(DateTime dateTime)
         {
             var cardFiles = _cardFileService.GetCardsByDateOfCreation(dateTime);

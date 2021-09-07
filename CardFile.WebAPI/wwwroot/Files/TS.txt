@@ -1,0 +1,14 @@
+interface ICar extends IMovable
+extends - наслідування
+
+
+class User implements IUser
+implements - імплементація інтерфесів класами
+
+
+namespace Personnel 		
+{
+ export class Employee {}
+}
+
+<reference path="personnel.ts" />		-референс на неймспейс

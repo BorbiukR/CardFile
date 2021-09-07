@@ -34,7 +34,7 @@
             <response code="404">Unable to delete a card due error</response>
             <response code="401">Unauthorized</response>
         </member>
-        <member name="M:CardFile.WebAPI.Controllers.CardController.GetAllCardFiles">
+        <member name="M:CardFile.WebAPI.Controllers.CardController.GetAllCardFiles(System.Threading.CancellationToken)">
             <summary>
             Returns all the card files in the system
             </summary>
