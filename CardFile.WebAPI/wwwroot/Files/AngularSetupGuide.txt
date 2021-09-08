@@ -1,0 +1,25 @@
+Steps to pre-setup everything for work with angular:
+
+download and install node: 
+  https://nodejs.org/uk/download/
+Download and install dotnet core sdk: 
+  https://dotnet.microsoft.com/download/dotnet-core/3.0
+Install angular CLI globally (Launch next line in a console):
+  npm install -g @angular/cli
+And Typescript (also global): 
+  npm I -g typescript
+
+
+
+
+------------------------------
+First steps for project setup:
+
+Go to your project in console
+Run next line:
+  npm install
+Then Run next line:
+  ng serve
+In console find which port listening this app 
+go to this link
+

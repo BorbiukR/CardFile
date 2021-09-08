@@ -47,10 +47,9 @@ namespace CardFile.WebAPI.Controllers
         {
             if (formFiles == null)
             {
-                _logger.LogWarning("File not be load, not correct format");
+                _logger.LogWarning("File not be load (null or not correct format)");
                 return BadRequest("File can not be load");
             }
-                
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.Values.SelectMany(x => x.Errors.Select(c => c.ErrorMessage)));
@@ -86,7 +85,6 @@ namespace CardFile.WebAPI.Controllers
             await _cardFileService.UpdateCardFileAsync(cardFileId, formFiles, mappedCardFile);
 
             return Ok("Successfully updated");
-
         }
 
         /// <summary>

@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.18" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.18" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
     <PackageReference Include="Moq" Version="4.16.1" />
@@ -27,12 +28,6 @@
     <ProjectReference Include="..\CardFile.DAL\CardFile.DAL.csproj" />
     <ProjectReference Include="..\CardFile.Identity\CardFile.Identity.csproj" />
     <ProjectReference Include="..\CardFile.WebAPI\CardFile.WebAPI.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="BusinessTests\" />
-    <Folder Include="DataTests\" />
-    <Folder Include="IntegrationTests\" />
   </ItemGroup>
 
 </Project>
