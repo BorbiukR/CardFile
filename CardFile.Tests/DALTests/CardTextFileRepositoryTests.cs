@@ -11,7 +11,7 @@ namespace CardFile.Tests.DALTests
     public class CardTextFileRepositoryTests
     {
         [Fact]
-        public void CardTextFileRepository_FindAll_ReturnsAllValues()
+        public void CardTextFileRepository_FindAll_ReturnsAllCardFiles()
         {
             CancellationToken cts = new CancellationToken();
             using (var context = new CardFileDbContext(UnitTestHelper.GetXUnitTestDbOptions()))
@@ -25,7 +25,7 @@ namespace CardFile.Tests.DALTests
         }
 
         [Fact]
-        public async Task CardTextFileRepository_GetById_ReturnsSingleValue()
+        public async Task CardTextFileRepository_GetById_ReturnsSingleCardFile()
         {
             using (var context = new CardFileDbContext(UnitTestHelper.GetXUnitTestDbOptions()))
             {
@@ -40,7 +40,7 @@ namespace CardFile.Tests.DALTests
         }
 
         [Fact]
-        public async Task CardTextFileRepository_AddAsync_AddsValueToDatabase()
+        public async Task CardTextFileRepository_AddAsync_AddsCardFileToDatabase()
         {
             using (var context = new CardFileDbContext(UnitTestHelper.GetXUnitTestDbOptions()))
             {
@@ -55,7 +55,7 @@ namespace CardFile.Tests.DALTests
         }
 
         [Fact]
-        public async Task CardTextFileRepository_DeleteByIdAsync_DeletesEntity()
+        public async Task CardTextFileRepository_DeleteByIdAsync_DeletesCardFileEntity()
         {
             using (var context = new CardFileDbContext(UnitTestHelper.GetXUnitTestDbOptions()))
             {
@@ -69,7 +69,7 @@ namespace CardFile.Tests.DALTests
         }
 
         [Fact]
-        public async Task CardTextFileRepository_Update_UpdatesEntity()
+        public async Task CardTextFileRepository_Update_UpdatesCardFileEntity()
         {
             using (var context = new CardFileDbContext(UnitTestHelper.GetXUnitTestDbOptions()))
             {

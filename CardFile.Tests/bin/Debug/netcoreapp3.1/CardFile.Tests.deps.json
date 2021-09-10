@@ -24,6 +24,7 @@
     ".NETCoreApp,Version=v3.1": {
       "CardFile.Tests/1.0.0": {
         "dependencies": {
+          "AutoMapper": "10.1.1",
           "CardFile.BLL": "1.0.0",
           "CardFile.Contracts": "1.0.0",
           "CardFile.DAL": "1.0.0",

@@ -20,7 +20,7 @@ namespace CardFile.BLL.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IHostingEnvironment _hostingEnvironment; // IWebHostEnvironment 
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public CardFileService(IUnitOfWork unit,

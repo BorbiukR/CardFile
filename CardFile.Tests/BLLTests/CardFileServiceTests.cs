@@ -1,261 +1,217 @@
-﻿//using CardFile.BLL.DTO;
-//using CardFile.BLL.Interfaces;
-//using CardFile.BLL.Services;
-//using CardFile.BLL.Validation;
-//using CardFile.DAL.Entities;
-//using Data.Interfaces;
-//using Microsoft.AspNetCore.Hosting;
-//using Moq;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading;
-//using System.Threading.Tasks;
-//using Xunit;
+﻿using AutoMapper;
+using CardFile.BLL.DTO;
+using CardFile.BLL.MappingProfiles;
+using CardFile.BLL.Services;
+using CardFile.BLL.Validation;
+using CardFile.DAL.Entities;
+using Data.Interfaces;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Moq;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Xunit;
 
-//namespace CardFile.Tests.BLLTests
-//{
-//    public class CardFileServiceTests
-//    {
-//        [Fact]
-//        public void CardFileService_GetAll_ReturnsCardFileDTOs()
-//        {
-//            var expected = GetTestCardFileDTOs().ToList();
-//            var mockUnitOfWork = new Mock<IUnitOfWork>();
-//            CancellationToken cts = new CancellationToken();
-//            mockUnitOfWork.Setup(m => m.CardFileRepository.FindAll(cts))
-//                          .Returns(GetTestCardFileEntities().AsQueryable);
-//            ICardFileService cardFileService = new CardFileService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
+namespace CardFile.Tests.BLLTests
+{
+    public class CardFileServiceTests : Profile
+    {
+        private readonly CardFileService _cardFileService;
+        private readonly Mock<IUnitOfWork> _unitOfWork = new Mock<IUnitOfWork>();
+        private readonly IMapper _mapper;
+        private readonly Mock<IHttpContextAccessor> _httpContextAccessor = new Mock<IHttpContextAccessor>();
+        private readonly Mock<IHostingEnvironment> _hostingEnvironment = new Mock<IHostingEnvironment>();
+                            // IWebHostEnvironment 
+        private readonly Mock<IFormFile> _formFile = new Mock<IFormFile>();
+                          
+        public CardFileServiceTests()
+        {
+            if (_mapper == null)
+            {
+                var mappingConfig = new MapperConfiguration(mc =>
+                {
+                    mc.AddProfile(new BLLAutomapperProfile());
+                });
+                IMapper mapper = mappingConfig.CreateMapper();
+                _mapper = mapper;
+            }
 
-//            var actual = cardFileService.GetAll(cts).ToList();
+            _cardFileService = new CardFileService(_unitOfWork.Object, 
+                                       _mapper, 
+                                       _hostingEnvironment.Object, 
+                                       _httpContextAccessor.Object);
+        }
 
-//            for (int i = 0; i < actual.Count; i++)
-//            {
-//                Assert.Equal(expected[i].Id, actual[i].Id);
-//                Assert.Equal(expected[i].Path, actual[i].Path);
-//                Assert.Equal(expected[i].Language, actual[i].Language);
-//            }
-//        }
+        [Fact]
+        public void CardFileService_GetAll_ReturnsCardFileDTOs()
+        {
+            CancellationToken cts = new CancellationToken();
 
-//        private IEnumerable<CardFileDTO> GetTestCardFileDTOs()
-//        {
-//            return new List<CardFileDTO>()
-//            {
-//                new CardFileDTO
-//                {
-//                    Id = 1, FileName = "SQL.txt", Path = "/Files/SQL.txt", DateOfCreation = DateTime.Now,
-//                    Language = "sql", Description = "sql",UserId = "1"
-//                },
-//                new CardFileDTO
-//                {
-//                    Id = 2, FileName = "EF.txt", Path = "/Files/EF.txt", DateOfCreation = DateTime.Now,
-//                    Language = "ef", Description = "ef", UserId = "2"
-//                },
-//                new CardFileDTO 
-//                {
-//                    Id = 3, FileName = "Git command.txt", Path = "/Files/Git command.txt", DateOfCreation = DateTime.Now,
-//                    Language = "git", Description = "git", UserId = "3"
-//                },
-//                new CardFileDTO 
-//                {
-//                    Id = 4, FileName = "Angular.txt", Path = "/Files/Angular.txt", DateOfCreation = DateTime.Now,
-//                    Language = "Angular", Description = "Angular", UserId = "4"
-//                }
-//            };
-//        }
+            _unitOfWork.Setup(m => m.CardFileRepository.FindAll(cts))
+                          .Returns(GetTestCardFileEntities().AsQueryable);
 
-//        [Fact]
-//        public async Task BookService_GetByIdAsync_ReturnsBookModel()
-//        {
-//            var expected = GetTestCardFileDTOs().First();
-//            var mockUnitOfWork = new Mock<IUnitOfWork>();
-//            mockUnitOfWork.Setup(m => m.CardFileRepository.GetByIdAsync(It.IsAny<int>()))
-//                          .ReturnsAsync(GetTestCardFileEntities().First);
-//            ICardFileService cardFileService = new CardFileService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
-//            var actual = await cardFileService.GetByIdAsync(1);
+            var expected = GetTestCardFileDTOs().ToList();
+            var actual = _cardFileService.GetAll(cts).ToList();
 
-//            Assert.Equal(expected.Id, actual.Id);
-//            Assert.Equal(expected.Path, actual.Path);
-//            Assert.Equal(expected.Language, actual.Language);
-//        }
+            for (int i = 0; i < actual.Count; i++)
+            {
+                Assert.Equal(expected[i].Id, actual[i].Id);
+                Assert.Equal(expected[i].Path, actual[i].Path);
+                Assert.Equal(expected[i].Language, actual[i].Language);
+            }
+        }
 
-//        private List<CardFileEntitie> GetTestCardFileEntities()
-//        {
-//            return new List<CardFileEntitie>()
-//            {
-//                new CardFileEntitie
-//                {
-//                    Id = 1, FileName = "SQL.txt", Path = "/Files/SQL.txt", DateOfCreation = DateTime.Now,
-//                    Language = "sql", Description = "sql",UserId = "1"
-//                },
-//                new CardFileEntitie
-//                {
-//                    Id = 2, FileName = "EF.txt", Path = "/Files/EF.txt", DateOfCreation = DateTime.Now,
-//                    Language = "ef", Description = "ef", UserId = "2"
-//                },
-//                new CardFileEntitie 
-//                {
-//                    Id = 3, FileName = "Git command.txt", Path = "/Files/Git command.txt", DateOfCreation = DateTime.Now,
-//                    Language = "git", Description = "git", UserId = "3"
-//                },
-//                new CardFileEntitie 
-//                {
-//                    Id = 4, FileName = "Angular.txt", Path = "/Files/Angular.txt", DateOfCreation = DateTime.Now,
-//                    Language = "Angular", Description = "Angular", UserId = "4"
-//                }
-//            };
-//        }
+        [Fact]
+        public async Task CardFileService_GetByIdAsync_ReturnCardFileDTO()
+        {
+            int cardFileId = 1;
+            _unitOfWork.Setup(m => m.CardFileRepository.GetByIdAsync(It.IsAny<int>()))
+                          .ReturnsAsync(GetTestCardFileEntities().First());
 
-//        [Fact]
-//        public async Task CardFileService_AddCardFileAsync_AddsCardFile()
-//        {
-//            //Arrange
-//            var mockUnitOfWork = new Mock<IUnitOfWork>();
-//            mockUnitOfWork.Setup(x => x.CardFileRepository.AddAsync(It.IsAny<CardFileEntitie>()));
-//            ICardFileService cardFileService = new CardFileService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
-//            var cardFile = new CardFileDTO
-//            {
-//                Id = 1, FileName = "SQL.txt", Path = "/Files/SQL.txt", DateOfCreation = DateTime.Now,
-//                Language = "sql", Description = "sql", UserId = "1"
-//            };
+            var expected = GetTestCardFileDTOs().First();
+            var actual = await _cardFileService.GetByIdAsync(cardFileId);
 
-//            //Act
-//            await cardFileService.AddCardFileAsync(cardFile);
+            Assert.Equal(expected.Id, actual.Id);
+            Assert.Equal(expected.Path, actual.Path);
+            Assert.Equal(expected.Language, actual.Language);
+        }
+     
+        [Fact]
+        public void CardFileService_AddCardFileAsync_ThrowsCardFileExceptionWithEmptyLanguage()
+        {
+            _unitOfWork.Setup(m => m.CardFileRepository.AddAsync(It.IsAny<CardFileEntitie>()));
+      
+            var cardFile = new CardFileDTO
+            {
+                Id = 1,
+                FileName = "SQL.txt",
+                Path = "/Files/SQL.txt",
+                DateOfCreation = new DateTime(2021, 06, 20),
+                Language = "sql",
+                Description = "sql",
+                UserId = "1"
+            };
 
-//            //Assert
-//            mockUnitOfWork.Verify(x => x.CardFileRepository.AddAsync(It.Is<CardFileEntitie>(b => b.Language == cardFile.Language && b.Id == cardFile.Id)), Times.Once);
-//            mockUnitOfWork.Verify(x => x.SaveAsync(), Times.Once);
-//        }
+            Assert.ThrowsAsync<CardFileException>(() 
+                => _cardFileService.AddCardFileAsync(_formFile.Object, cardFile));
+        }
 
-//        [Fact]
-//        public void CardFileService_AddCardFileAsync_ThrowsCardFileExceptionWithWrongDateOfCreation()
-//        {
-//            var mockUnitOfWork = new Mock<IUnitOfWork>();
-//            mockUnitOfWork.Setup(x => x.CardFileRepository.AddAsync(It.IsAny<CardFileEntitie>()));
-//            ICardFileService cardFileService = new CardFileService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
-//            var cardFile = new CardFileDTO
-//            {
-//                Id = 1, FileName = "SQL.txt", Path = "/Files/SQL.txt", DateOfCreation = new DateTime(2021,06,20),
-//                Language = "sql", Description = "sql", UserId = "1"
-//            };
+        [Fact]
+        public void CardFileService_AddCardFileAsync_ThrowsCardFileExceptionWithEmptyDescription()
+        {
+            _unitOfWork.Setup(m => m.CardFileRepository.AddAsync(It.IsAny<CardFileEntitie>()));
 
-//            Assert.ThrowsAsync<CardFileException>(() => cardFileService.AddCardFileAsync(cardFile));
-//        }
+            var cardFile = new CardFileDTO
+            {
+                Id = 1,
+                FileName = "SQL.txt",
+                Path = "/Files/SQL.txt",
+                DateOfCreation = new DateTime(2021, 06, 20),
+                Language = "",
+                Description = "",
+                UserId = "1"
+            };
 
-//        [Fact]
-//        public void CardFileService_AddCardFileAsync_ThrowsCardFileExceptionWithEmptyLanguage()
-//        {
-//            var mockUnitOfWork = new Mock<IUnitOfWork>();
-//            mockUnitOfWork.Setup(x => x.CardFileRepository.AddAsync(It.IsAny<CardFileEntitie>()));
-//            ICardFileService cardFileService = new CardFileService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
-//            var cardFile = new CardFileDTO
-//            {
-//                Id = 1, FileName = "SQL.txt", Path = "/Files/SQL.txt", DateOfCreation = DateTime.Now,
-//                Language = "", Description = "sql", UserId = "1"
-//            };
+            Assert.ThrowsAsync<CardFileException>(()
+                => _cardFileService.AddCardFileAsync(_formFile.Object, cardFile));
+        }
+      
+        [Fact]
+        public void CardFileService_UpdateCardFileAsync_ThrowsCardFileExceptionWithEmptyDescription()
+        {
+            _unitOfWork.Setup(m => m.CardFileRepository.Update(It.IsAny<CardFileEntitie>()));
 
-//            Assert.ThrowsAsync<CardFileException>(() => cardFileService.AddCardFileAsync(cardFile));
-//        }
+            var cardFile = new CardFileDTO
+            {
+                Id = 1,
+                FileName = "SQL.txt",
+                Path = "/Files/SQL.txt",
+                DateOfCreation = DateTime.Now,
+                Language = "sql",
+                Description = "",
+                UserId = "1"
+            };
 
-//        [Fact]
-//        public void CardFileService_AddCardFileAsync_ThrowsCardFileExceptionWithEmptyDescription()
-//        {
-//            var mockUnitOfWork = new Mock<IUnitOfWork>();
-//            mockUnitOfWork.Setup(x => x.CardFileRepository.AddAsync(It.IsAny<CardFileEntitie>()));
-//            ICardFileService cardFileService = new CardFileService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
-//            var cardFile = new CardFileDTO
-//            {
-//                Id = 1, FileName = "SQL.txt", Path = "/Files/SQL.txt", DateOfCreation = DateTime.Now,
-//                Language = "sql", Description = "", UserId = "1"
-//            };
+            Assert.ThrowsAsync<CardFileException>(() 
+                => _cardFileService.UpdateCardFileAsync(cardFile.Id, _formFile.Object, cardFile));
+        }
 
-//            Assert.ThrowsAsync<CardFileException>(() => cardFileService.AddCardFileAsync(cardFile));
-//        }
+        [Fact]
+        public void CardFileService_UpdateCardFileAsync_ThrowsCardFileExceptionWithEmptyLanguage()
+        {
+            _unitOfWork.Setup(m => m.CardFileRepository.Update(It.IsAny<CardFileEntitie>()));
 
-//        [Theory]
-//        [InlineData(1)]
-//        [InlineData(2)]
-//        [InlineData(100)]
-//        public async Task CardFileService_DeleteByIdAsync_DeletesCardFile(int cardFileId)
-//        {
-//            //Arrange
-//            var mockUnitOfWork = new Mock<IUnitOfWork>();
-//            mockUnitOfWork.Setup(x => x.CardFileRepository.DeleteByIdAsync(It.IsAny<int>()));
-//            ICardFileService cardFileService = new CardFileService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
+            var cardFile = new CardFileDTO
+            {
+                Id = 1,
+                FileName = "SQL.txt",
+                Path = "/Files/SQL.txt",
+                DateOfCreation = DateTime.Now,
+                Language = "",
+                Description = "sql",
+                UserId = "1"
+            };
 
-//            //Act
-//            await cardFileService.DeleteByIdAsync(cardFileId);
+            Assert.ThrowsAsync<CardFileException>(()
+                => _cardFileService.UpdateCardFileAsync(cardFile.Id, _formFile.Object, cardFile));
+        }
 
-//            //Assert
-//            mockUnitOfWork.Verify(x => x.CardFileRepository.DeleteByIdAsync(cardFileId), Times.Once);
-//            mockUnitOfWork.Verify(x => x.SaveAsync(), Times.Once);
-//        }
+        private IEnumerable<CardFileDTO> GetTestCardFileDTOs()
+        {
+            return new List<CardFileDTO>()
+            {
+                new CardFileDTO
+                {
+                    Id = 1, FileName = "SQL.txt", Path = "/Files/SQL.txt", DateOfCreation = DateTime.Now,
+                    Language = "sql", Description = "sql",UserId = "1"
+                },
+                new CardFileDTO
+                {
+                    Id = 2, FileName = "EF.txt", Path = "/Files/EF.txt", DateOfCreation = DateTime.Now,
+                    Language = "ef", Description = "ef", UserId = "2"
+                },
+                new CardFileDTO
+                {
+                    Id = 3, FileName = "Git command.txt", Path = "/Files/Git command.txt", DateOfCreation = DateTime.Now,
+                    Language = "git", Description = "git", UserId = "3"
+                },
+                new CardFileDTO
+                {
+                    Id = 4, FileName = "Angular.txt", Path = "/Files/Angular.txt", DateOfCreation = DateTime.Now,
+                    Language = "Angular", Description = "Angular", UserId = "4"
+                }
+            };
+        }
 
-//        [Fact]
-//        public async Task CardFileService_UpdateAsync_UpdatesCardFile()
-//        {
-//            //Arrange
-//            var cardFile = new CardFileDTO
-//            {
-//                Id = 1, FileName = "SQL.txt", Path = "/Files/SQL.txt", DateOfCreation = DateTime.Now,
-//                Language = "sql", Description = "sql", UserId = "1"
-//            };
-//            var mockUnitOfWork = new Mock<IUnitOfWork>();
-//            mockUnitOfWork.Setup(x => x.CardFileRepository.Update(It.IsAny<CardFileEntitie>()));
-//            ICardFileService cardFileService = new CardFileService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
-
-//            //Act
-//            await cardFileService.UpdateCardFileAsync(cardFile);
-
-//            //Assert
-//            mockUnitOfWork.Verify(x => x.CardFileRepository.Update(It.Is<CardFileEntitie>(b => b.Language == cardFile.Language && b.Id == cardFile.Id)), Times.Once);
-//            mockUnitOfWork.Verify(x => x.SaveAsync(), Times.Once);
-//        }
-
-//        [Fact]
-//        public void CardFileService_UpdateCardFileAsync_ThrowsCardFileExceptionWithEmptyDescription()
-//        {
-//            var cardFile = new CardFileDTO
-//            {
-//                Id = 1, FileName = "SQL.txt", Path = "/Files/SQL.txt", DateOfCreation = DateTime.Now,
-//                Language = "sql", Description = "", UserId = "1"
-//            };
-//            var mockUnitOfWork = new Mock<IUnitOfWork>();
-//            mockUnitOfWork.Setup(x => x.CardFileRepository.Update(It.IsAny<CardFileEntitie>()));
-//            ICardFileService cardFileService = new CardFileService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
-
-//            Assert.ThrowsAsync<CardFileException>(() => cardFileService.UpdateCardFileAsync(cardFile));
-//        }
-
-//        [Fact]
-//        public void CardFileService_UpdateCardFileAsync_ThrowsCardFileExceptionWithEmptyLanguage()
-//        {
-//            var cardFile = new CardFileDTO
-//            {
-//                Id = 1, FileName = "SQL.txt", Path = "/Files/SQL.txt", DateOfCreation = DateTime.Now,
-//                Language = "", Description = "sql", UserId = "1"
-//            };
-//            var mockUnitOfWork = new Mock<IUnitOfWork>();
-//            mockUnitOfWork.Setup(x => x.CardFileRepository.Update(It.IsAny<CardFileEntitie>()));
-//            ICardFileService cardFileService = new CardFileService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
-
-//            Assert.ThrowsAsync<CardFileException>(() => cardFileService.UpdateCardFileAsync(cardFile));
-//        }
-
-//        [Fact]
-//        [Obsolete]
-//        public void CardFileService_UpdateCardFileAsync_ThrowsCardFileExceptionWithWrongDateOfCreation()
-//        {
-//            var cardFile = new CardFileDTO 
-//            {
-//                Id = 1, FileName = "SQL.txt", Path = "/Files/SQL.txt", DateOfCreation = new DateTime(2021, 06, 20),
-//                Language = "sql", Description = "sql", UserId = "1"
-//            };
-//            var mockUnitOfWork = new Mock<IUnitOfWork>();
-//            mockUnitOfWork.Setup(x => x.CardFileRepository.Update(It.IsAny<CardFileEntitie>()));
-//            ICardFileService cardFileService = new CardFileService(mockUnitOfWork.Object, UnitTestHelper.CreateMapperProfile());
-
-//            Assert.ThrowsAsync<CardFileException>(() => cardFileService.UpdateCardFileAsync(cardFile.Id, cardFile));
-//        }
-//    }
-//}
+        private List<CardFileEntitie> GetTestCardFileEntities()
+        {
+            return new List<CardFileEntitie>()
+            {
+                new CardFileEntitie
+                {
+                    Id = 1, FileName = "SQL.txt", Path = "/Files/SQL.txt", DateOfCreation = DateTime.Now,
+                    Language = "sql", Description = "sql", UserId = "1"
+                },
+                new CardFileEntitie
+                {
+                    Id = 2, FileName = "EF.txt", Path = "/Files/EF.txt", DateOfCreation = DateTime.Now,
+                    Language = "ef", Description = "ef", UserId = "2"
+                },
+                new CardFileEntitie
+                {
+                    Id = 3, FileName = "Git command.txt", Path = "/Files/Git command.txt", DateOfCreation = DateTime.Now,
+                    Language = "git", Description = "git", UserId = "3"
+                },
+                new CardFileEntitie
+                {
+                    Id = 4, FileName = "Angular.txt", Path = "/Files/Angular.txt", DateOfCreation = DateTime.Now,
+                    Language = "Angular", Description = "Angular", UserId = "4"
+                }
+            };
+        }
+    }
+}

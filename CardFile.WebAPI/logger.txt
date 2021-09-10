@@ -30,4 +30,7 @@ InformationApplication started. Press Ctrl+C to shut down.
 9/7/2021 10:25:42 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
 9/7/2021 10:25:42 PMWarningFile not be load, not correct format
 9/7/2021 10:26:15 PMErrorAn unhandled exception has occurred while executing the request.
-9/7/2021 10:26:23 PM
+9/7/2021 10:26:23 PMInformationApplication started. Press Ctrl+C to shut down.
+9/9/2021 5:43:55 PMInformationHosting environment: Development
+9/9/2021 5:43:55 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/9/2021 5:43:55 PM
