@@ -8,10 +8,10 @@ using Xunit;
 
 namespace CardFile.Tests.DALTests
 {
-    public class CardTextFileRepositoryTests
+    public class CardFileRepositoryTests
     {
         [Fact]
-        public void CardTextFileRepository_FindAll_ReturnsAllCardFiles()
+        public void CardFileRepository_FindAll_ReturnsAllCardFiles()
         {
             CancellationToken cts = new CancellationToken();
             using (var context = new CardFileDbContext(UnitTestHelper.GetXUnitTestDbOptions()))
@@ -25,7 +25,7 @@ namespace CardFile.Tests.DALTests
         }
 
         [Fact]
-        public async Task CardTextFileRepository_GetById_ReturnsSingleCardFile()
+        public async Task CardFileRepository_GetById_ReturnsSingleCardFile()
         {
             using (var context = new CardFileDbContext(UnitTestHelper.GetXUnitTestDbOptions()))
             {
@@ -40,7 +40,7 @@ namespace CardFile.Tests.DALTests
         }
 
         [Fact]
-        public async Task CardTextFileRepository_AddAsync_AddsCardFileToDatabase()
+        public async Task CardFileRepository_AddAsync_AddsCardFileToDatabase()
         {
             using (var context = new CardFileDbContext(UnitTestHelper.GetXUnitTestDbOptions()))
             {
@@ -55,7 +55,7 @@ namespace CardFile.Tests.DALTests
         }
 
         [Fact]
-        public async Task CardTextFileRepository_DeleteByIdAsync_DeletesCardFileEntity()
+        public async Task CardFileRepository_DeleteByIdAsync_DeletesCardFileEntity()
         {
             using (var context = new CardFileDbContext(UnitTestHelper.GetXUnitTestDbOptions()))
             {
@@ -69,7 +69,7 @@ namespace CardFile.Tests.DALTests
         }
 
         [Fact]
-        public async Task CardTextFileRepository_Update_UpdatesCardFileEntity()
+        public async Task CardFileRepository_Update_UpdatesCardFileEntity()
         {
             using (var context = new CardFileDbContext(UnitTestHelper.GetXUnitTestDbOptions()))
             {
@@ -87,7 +87,7 @@ namespace CardFile.Tests.DALTests
         }
 
         [Fact]
-        public void CardTextFileRepository_FindByCondition_ReturnsValuesWithSpecialCondition()
+        public void CardFileRepository_FindByCondition_ReturnsValuesWithSpecialCondition()
         {
             using (var context = new CardFileDbContext(UnitTestHelper.GetXUnitTestDbOptions()))
             {
