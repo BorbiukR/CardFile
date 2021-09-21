@@ -44,6 +44,7 @@ namespace CardFile.WebAPI
 
             app.UseHttpsRedirection();
 
+            app.UseDefaultFiles();
             app.UseStaticFiles(new StaticFileOptions()
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"StaticFiles")),

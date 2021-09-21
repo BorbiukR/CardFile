@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Http;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,7 +24,6 @@ namespace CardFile.Tests.BLLTests
         private readonly IMapper _mapper;
         private readonly Mock<IHttpContextAccessor> _httpContextAccessor = new Mock<IHttpContextAccessor>();
         private readonly Mock<IHostingEnvironment> _hostingEnvironment = new Mock<IHostingEnvironment>();
-                            // IWebHostEnvironment 
         private readonly Mock<IFormFile> _formFile = new Mock<IFormFile>();
                           
         public CardFileServiceTests()
