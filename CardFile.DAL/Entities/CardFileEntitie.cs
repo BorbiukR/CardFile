@@ -10,9 +10,7 @@ namespace CardFile.DAL.Entities
         [Key]
         public int Id { get; set; }
 
-        public string FileName { get; set; }
-
-        public string Path { get; set; }
+        public FileInfoEntitie FileInfoEntitie { get; set; }
 
         public DateTime DateOfCreation { get; set; }
 

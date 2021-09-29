@@ -6,10 +6,10 @@ namespace CardFile.BLL.Interfaces
 {
     public interface ICrud<TModel> where TModel : class
     {
-        IEnumerable<TModel> GetAll(CancellationToken cancellationToken);
+        IEnumerable<TModel> GetAll();
 
-        Task<TModel> GetByIdAsync(int id);
+        Task<TModel> GetByIdAsync(int id, CancellationToken cancellationToken);
 
-        Task<bool> DeleteByIdAsync(int modelId);
+        Task<bool> DeleteByIdAsync(int modelId, CancellationToken cancellationToken);
     }
 }

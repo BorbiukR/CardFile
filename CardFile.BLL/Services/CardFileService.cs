@@ -6,13 +6,13 @@ using CardFile.DAL.Entities;
 using Data.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using CardFile.Identity.Extensions;
 using System.Threading;
+using System.Collections.Generic;
 
 namespace CardFile.BLL.Services
 {
@@ -34,7 +34,9 @@ namespace CardFile.BLL.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<bool> AddCardFileAsync(IFormFile uploadedFile, CardFileDTO cardFile)
+        public async Task<bool> AddCardFileAsync(
+            IFormFile uploadedFile, 
+            CardFileDTO cardFile)
         {
             if (uploadedFile == null)
                 throw new CardFileException("Уou cannot add a file.");
@@ -62,19 +64,19 @@ namespace CardFile.BLL.Services
             return added > 0;
         }
 
-        // TODO: int cardFileId - лишній параметр (використати GetByIdAsync(cardFileId))
-        public async Task<bool> UpdateCardFileAsync(int cardFileId, IFormFile uploadedFile, CardFileDTO cardFile)
+        public async Task<bool> UpdateCardFileAsync(
+            int cardFileId, 
+            IFormFile uploadedFile, 
+            CardFileDTO cardFile)
         {
-            var userOwnsCardFile = await UserOwnsCardFileAsync(cardFileId, _httpContextAccessor.GetUserId());
+            var userOwnsCardFile = UserOwnsCardFileAsync(cardFileId, _httpContextAccessor.GetUserId());
 
             if (!userOwnsCardFile)
                 throw new CardFileException("Уou do not own this card file.");
 
             if (uploadedFile == null)
                 throw new CardFileException("Уou cannot add a file.");
-
-            var mappedFile = await _unitOfWork.CardFileRepository.GetByIdAsync(cardFileId);
-
+  
             string path = "/Files/" + uploadedFile.FileName;
 
             using (var stream = File.Create(_hostingEnvironment.WebRootPath + path))
@@ -82,29 +84,34 @@ namespace CardFile.BLL.Services
                 uploadedFile.CopyTo(stream);
             }
 
-            mappedFile.FileName = uploadedFile.FileName;
-            mappedFile.Path = path;
-            mappedFile.Description = cardFile.Description;
-            mappedFile.Language = cardFile.Language;
+            cardFile.FileName = uploadedFile.FileName;
+            cardFile.Path = path;
+            cardFile.Description = cardFile.Description;
+            cardFile.Language = cardFile.Language;
+            cardFile.UserId = _httpContextAccessor.GetUserId();
 
-            _unitOfWork.CardFileRepository.Update(mappedFile);
+            var mappedFile = _mapper.Map<CardFileEntitie>(cardFile);
+
+            await _unitOfWork.CardFileRepository.UpdateAsync(mappedFile);
             var updated = await _unitOfWork.SaveAsync();
             return updated > 0;
         }
 
-        public async Task<bool> DeleteByIdAsync(int cardFileId)
+        public async Task<bool> DeleteByIdAsync(int cardFileId, CancellationToken cancellationToken)
         {
             if (cardFileId == 0)
                 throw new CardFileException("Уou cannot delete a card. Card Id is null or empty");
 
-            var userOwnsCardFile = await UserOwnsCardFileAsync(cardFileId, _httpContextAccessor.GetUserId());
+            var userOwnsCardFile = UserOwnsCardFileAsync(cardFileId, _httpContextAccessor.GetUserId());
 
             if (!userOwnsCardFile)
                 throw new CardFileException("Уou do not own this card file.");
 
-            var cardFile = await _unitOfWork.CardFileRepository.GetByIdAsync(cardFileId);
+            var cardFile = await _unitOfWork.CardFileRepository.GetByIdAsync(cardFileId, cancellationToken);
 
-            string fullPathToCardFile = _hostingEnvironment.WebRootPath + cardFile.Path;
+            var mappedCardFile = _mapper.Map<CardFileDTO>(cardFile);
+
+            string fullPathToCardFile = _hostingEnvironment.WebRootPath + mappedCardFile.Path;
 
             if (File.Exists(fullPathToCardFile))
                 File.Delete(fullPathToCardFile);
@@ -114,26 +121,25 @@ namespace CardFile.BLL.Services
             return deleted > 0;
         }
 
-        public async Task<bool> UserOwnsCardFileAsync(int cardFileId, string userId)
+        public bool UserOwnsCardFileAsync(int cardFileId, string userId)
         {
-            var cardFiles = await Task.Run(() =>
-                _unitOfWork.CardFileRepository.FindByCondition(x => x.Id == cardFileId).FirstOrDefault());
+            var cardFiles = _unitOfWork.CardFileRepository.FindByCondition(x => x.Id == cardFileId).FirstOrDefault();
 
             return cardFiles == null || cardFiles.UserId != userId
                 ? false
                 : true;
         }
 
-        public IEnumerable<CardFileDTO> GetAll(CancellationToken cancellationToken)
+        public IEnumerable<CardFileDTO> GetAll()
         {
-            var cards = _unitOfWork.CardFileRepository.FindAll(cancellationToken).ToList();
+            var cards = _unitOfWork.CardFileRepository.GetAllWithDetails().ToList();
 
             return _mapper.Map<IEnumerable<CardFileDTO>>(cards);
         }
 
-        public async Task<CardFileDTO> GetByIdAsync(int id)
+        public async Task<CardFileDTO> GetByIdAsync(int id, CancellationToken cancellationToken)
         {
-            var card = await _unitOfWork.CardFileRepository.GetByIdAsync(id);
+            var card = await _unitOfWork.CardFileRepository.GetByIdAsync(id, cancellationToken);
 
             if (card == null)
                 throw new CardFileException("Уou cannot get a card. Card Id is null or empty");
@@ -166,19 +172,19 @@ namespace CardFile.BLL.Services
         /// </summary>
         /// <param name="cardFileId"></param>
         /// <returns></returns>
-        public async Task<string> GetFilePath(int cardFileId)
+        public async Task<string> GetFilePathAsync(int cardFileId, CancellationToken cancellationToken)
         {
-            var cardFile = await _unitOfWork.CardFileRepository.GetByIdAsync(cardFileId);
+            var cardFile = await _unitOfWork.CardFileRepository.GetByIdAsync(cardFileId, cancellationToken);
 
             if (cardFile == null)
                 throw new CardFileException("Card File is null.");
 
-            var userOwnsCardFile = await UserOwnsCardFileAsync(cardFileId, _httpContextAccessor.GetUserId());
+            var userOwnsCardFile = UserOwnsCardFileAsync(cardFileId, _httpContextAccessor.GetUserId());
 
             if (!userOwnsCardFile)
                 throw new CardFileException("Уou do not own this file.");
 
-            string fullPathToCardFile = _hostingEnvironment.WebRootPath + cardFile.Path;
+            string fullPathToCardFile = _hostingEnvironment.WebRootPath + cardFile.FileInfoEntitie.Path;
 
             if (!File.Exists(fullPathToCardFile))
                 throw new CardFileException("File is not exsist");

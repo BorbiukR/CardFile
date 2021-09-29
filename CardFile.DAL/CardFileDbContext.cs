@@ -10,11 +10,13 @@ namespace CardFile.DAL
     {
         public DbSet<CardFileEntitie> CardFiles { get; set; }
 
+        public DbSet<FileInfoEntitie> FileInfoEntities { get; set; }
+
         public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         public CardFileDbContext(DbContextOptions<CardFileDbContext> options) : base(options)
         {
-            
+            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

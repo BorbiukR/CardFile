@@ -1,0 +1,21 @@
+1)	ctrl + space = показти доступний інтелісесн
+	ctrl + tab = показати активні вікна (як alt + tab в windows)
+	alt + enter = швидка дія в VS (видаляє using)
+	F9 = ставить breakpoint
+	shift + F11 = вертає назад по debug
+	ctrl + shift + F9 = remowe all breakpoits
+	ctrl + shift + F = find and replace
+
+2)	ctrl + F10 = дебажить з місця де вказаний курсор
+	ctrl + K + C = comment
+	ctrl + K + U = uncomment
+	ctrl + '-' = вертає на попереднє місце курсора
+	ctrl + '+' = вертає вперед на місце курсора
+	ctrl + K + R або shift + F12 = показти, де використовується
+
+3)	shift + alt + enter = full screen
+	ctrl + Q = search
+	alt + стрілочки = рухає строку
+	alt + ЛКМ = пище один текст у виділених рядочках
+	shift + стрілочки = виділяє рядки
+	

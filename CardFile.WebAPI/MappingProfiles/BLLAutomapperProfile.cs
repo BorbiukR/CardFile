@@ -8,7 +8,12 @@ namespace CardFile.BLL.MappingProfiles
     {
         public BLLAutomapperProfile()
         {
-            CreateMap<CardFileEntitie,CardFileDTO>().ReverseMap();
+            CreateMap<CardFileEntitie,CardFileDTO>()
+                .IncludeMembers(x => x.FileInfoEntitie)
+                .ReverseMap();
+
+            CreateMap<FileInfoEntitie, CardFileDTO>()
+                .ReverseMap();
         }
     }
 }

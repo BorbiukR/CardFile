@@ -25,16 +25,17 @@
             <response code="400">Unable to update a card due to validation error</response>
             <response code="401">Unauthorized</response>
         </member>
-        <member name="M:CardFile.WebAPI.Controllers.CardController.DeleteCardFileById(System.Int32)">
+        <member name="M:CardFile.WebAPI.Controllers.CardController.DeleteCardFileById(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Delete a card file by id
             </summary>
             <param name="cardFileId"></param>
+            <param name="cancellationToken"></param>
             <response code="200">Deleted a card in the system</response>
             <response code="404">Unable to delete a card due error</response>
             <response code="401">Unauthorized</response>
         </member>
-        <member name="M:CardFile.WebAPI.Controllers.CardController.GetAllCardFiles(System.Threading.CancellationToken)">
+        <member name="M:CardFile.WebAPI.Controllers.CardController.GetAllCardFiles">
             <summary>
             Returns all the card files in the system
             </summary>
@@ -42,11 +43,12 @@
             <response code="404">Not Found any card files</response>
             <response code="401">Unauthorized</response>
         </member>
-        <member name="M:CardFile.WebAPI.Controllers.CardController.GetCardFileByIdAsync(System.Int32)">
+        <member name="M:CardFile.WebAPI.Controllers.CardController.GetCardFileByIdAsync(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Returns a card file by id
             </summary>
             <param name="id"></param>
+            <param name="cancellationToken"></param>
             <response code="200">Get a card file</response>
             <response code="404">Not Found any card file</response>
             <response code="401">Unauthorized</response>
@@ -69,11 +71,12 @@
             <response code="404">Not Found any card files</response>
             <response code="401">Unauthorized</response>
         </member>
-        <member name="M:CardFile.WebAPI.Controllers.CardController.DownloadFile(System.Int32)">
+        <member name="M:CardFile.WebAPI.Controllers.CardController.DownloadFile(System.Int32,System.Threading.CancellationToken)">
             <summary>
             Download file by card id
             </summary>
             <param name="cardFileId"></param>
+            <param name="cancellationToken"></param>
             <response code="200">Download file</response>
             <response code="404">Not Found any file</response>
             <response code="401">Unauthorized</response>

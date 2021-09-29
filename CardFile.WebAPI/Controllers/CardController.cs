@@ -72,7 +72,10 @@ namespace CardFile.WebAPI.Controllers
         /// <response code="401">Unauthorized</response>
         [HttpPut("card/{cardFileId}")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdateCardFile(int cardFileId, IFormFile formFiles, [FromQuery] CardFileRequest request)
+        public async Task<IActionResult> UpdateCardFile(
+            int cardFileId, 
+            IFormFile formFiles, 
+            [FromQuery] CardFileRequest request)
         {
             if (formFiles == null)
                 return BadRequest("File can not be load");
@@ -91,17 +94,18 @@ namespace CardFile.WebAPI.Controllers
         /// Delete a card file by id
         /// </summary>
         /// <param name="cardFileId"></param>
+        /// <param name="cancellationToken"></param>
         /// <response code="200">Deleted a card in the system</response>
         /// <response code="404">Unable to delete a card due error</response>
         /// <response code="401">Unauthorized</response>
         [HttpDelete("card/{cardFileId}")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteCardFileById(int cardFileId)
+        public async Task<IActionResult> DeleteCardFileById(int cardFileId, CancellationToken cancellationToken)
         {
             if (cardFileId <= 0)
                 return NotFound();
 
-            await _cardFileService.DeleteByIdAsync(cardFileId);
+            await _cardFileService.DeleteByIdAsync(cardFileId, cancellationToken); // TODO: Handle with midle middleware?
 
             return Ok("Successfully deleted");
         }
@@ -114,9 +118,9 @@ namespace CardFile.WebAPI.Controllers
         /// <response code="401">Unauthorized</response>
         [HttpGet("cards")]
         [AllowAnonymous]
-        public IActionResult GetAllCardFiles(CancellationToken cancellationToken)
+        public IActionResult GetAllCardFiles()
         {
-            var cardFiles = _cardFileService.GetAll(cancellationToken);
+            var cardFiles = _cardFileService.GetAll();
             var mappedCardFiles = _mapper.Map<List<CardFileResponse>>(cardFiles);
 
             if (cardFiles == null || mappedCardFiles == null)
@@ -129,14 +133,15 @@ namespace CardFile.WebAPI.Controllers
         /// Returns a card file by id
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
         /// <response code="200">Get a card file</response>
         /// <response code="404">Not Found any card file</response>
         /// <response code="401">Unauthorized</response>
         [HttpGet("cards/{id}")]
         [Authorize(Roles = "Admin,User")]
-        public async Task<IActionResult> GetCardFileByIdAsync(int id)
+        public async Task<IActionResult> GetCardFileByIdAsync(int id, CancellationToken cancellationToken)
         {
-            var cardFile = await _cardFileService.GetByIdAsync(id);
+            var cardFile = await _cardFileService.GetByIdAsync(id, cancellationToken);
             var mappedCardFile = _mapper.Map<CardFileResponse>(cardFile);
 
             if (cardFile == null || mappedCardFile == null)
@@ -189,14 +194,15 @@ namespace CardFile.WebAPI.Controllers
         /// Download file by card id
         /// </summary>
         /// <param name="cardFileId"></param>
+        /// <param name="cancellationToken"></param>
         /// <response code="200">Download file</response>
         /// <response code="404">Not Found any file</response>
         /// <response code="401">Unauthorized</response>
         [HttpGet("file/{cardFileId}")]
         [Authorize(Roles = "Admin,User")]
-        public async Task<IActionResult> DownloadFile(int cardFileId)
+        public async Task<IActionResult> DownloadFile(int cardFileId, CancellationToken cancellationToken)
         {
-            var filePath = await _cardFileService.GetFilePath(cardFileId);
+            var filePath = await _cardFileService.GetFilePathAsync(cardFileId, cancellationToken);
 
             var bytes = await System.IO.File.ReadAllBytesAsync(filePath);
 

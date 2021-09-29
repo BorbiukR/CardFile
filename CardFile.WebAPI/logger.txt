@@ -61,4 +61,43 @@ InformationApplication started. Press Ctrl+C to shut down.
 9/20/2021 3:44:26 PMInformationApplication started. Press Ctrl+C to shut down.
 9/21/2021 11:25:39 AMInformationHosting environment: Development
 9/21/2021 11:25:39 AMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
-9/21/2021 11:25:39 AM
+9/21/2021 11:25:39 AMInformationApplication started. Press Ctrl+C to shut down.
+9/27/2021 1:11:44 PMInformationHosting environment: Development
+9/27/2021 1:11:44 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/27/2021 1:11:44 PMErrorAn unhandled exception has occurred while executing the request.
+9/27/2021 1:12:45 PMInformationApplication started. Press Ctrl+C to shut down.
+9/27/2021 1:16:45 PMInformationHosting environment: Development
+9/27/2021 1:16:45 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/27/2021 1:16:45 PMInformationApplication started. Press Ctrl+C to shut down.
+9/27/2021 1:26:09 PMInformationHosting environment: Development
+9/27/2021 1:26:09 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/27/2021 1:26:09 PMInformationApplication started. Press Ctrl+C to shut down.
+9/27/2021 2:31:35 PMInformationHosting environment: Development
+9/27/2021 2:31:35 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/27/2021 2:31:35 PMInformationApplication started. Press Ctrl+C to shut down.
+9/27/2021 2:36:25 PMInformationHosting environment: Development
+9/27/2021 2:36:25 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/27/2021 2:36:25 PMInformationApplication started. Press Ctrl+C to shut down.
+9/27/2021 9:22:47 PMInformationHosting environment: Development
+9/27/2021 9:22:47 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/27/2021 9:22:47 PMInformationApplication started. Press Ctrl+C to shut down.
+9/27/2021 9:23:53 PMInformationHosting environment: Development
+9/27/2021 9:23:53 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/27/2021 9:23:53 PMInformationApplication started. Press Ctrl+C to shut down.
+9/27/2021 9:26:40 PMInformationHosting environment: Development
+9/27/2021 9:26:40 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/27/2021 9:26:40 PMInformationApplication started. Press Ctrl+C to shut down.
+9/27/2021 9:29:48 PMInformationHosting environment: Development
+9/27/2021 9:29:48 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/27/2021 9:29:48 PMErrorAn unhandled exception has occurred while executing the request.
+9/27/2021 9:32:11 PMInformationApplication started. Press Ctrl+C to shut down.
+9/27/2021 9:33:55 PMInformationHosting environment: Development
+9/27/2021 9:33:55 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/27/2021 9:33:55 PMInformationApplication started. Press Ctrl+C to shut down.
+9/27/2021 9:45:13 PMInformationHosting environment: Development
+9/27/2021 9:45:13 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/27/2021 9:45:13 PMErrorAn unhandled exception has occurred while executing the request.
+9/27/2021 9:46:13 PMInformationApplication started. Press Ctrl+C to shut down.
+9/29/2021 5:13:47 PMInformationHosting environment: Development
+9/29/2021 5:13:47 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/29/2021 5:13:47 PM

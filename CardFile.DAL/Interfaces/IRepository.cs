@@ -8,15 +8,15 @@ namespace CardFile.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        IQueryable<TEntity> FindAll(CancellationToken cancellationToken);
+        IQueryable<TEntity> GetAll();
 
-        Task<TEntity> GetByIdAsync(int id);
+        Task<TEntity> GetByIdAsync(int id, CancellationToken cancellationToken);
         
         Task AddAsync(TEntity entity);
 
-        void Update(TEntity entity);
-        
-        void Delete(TEntity entity);
+        Task<int> UpdateAsync(TEntity entity);
+
+        Task<int> DeleteAsync(TEntity entity);
 
         Task DeleteByIdAsync(int id);
 

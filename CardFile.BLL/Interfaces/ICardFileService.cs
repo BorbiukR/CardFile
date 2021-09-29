@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CardFile.BLL.Interfaces
@@ -16,8 +17,8 @@ namespace CardFile.BLL.Interfaces
 
         Task<bool> UpdateCardFileAsync(int cardFileId, IFormFile uploadedFile, CardFileDTO cardFile);
 
-        Task<bool> UserOwnsCardFileAsync(int cardFileId, string getUserId);
+        bool UserOwnsCardFileAsync(int cardFileId, string getUserId);
 
-        Task<string> GetFilePath(int cardFileId);
+        Task<string> GetFilePathAsync(int cardFileId, CancellationToken cancellationToken);
     }
 }
