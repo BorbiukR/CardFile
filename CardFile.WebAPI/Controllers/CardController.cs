@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -51,9 +50,6 @@ namespace CardFile.WebAPI.Controllers
                 return BadRequest("File can not be load");
             }
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState.Values.SelectMany(x => x.Errors.Select(c => c.ErrorMessage)));
-
             var mappedCardFile = _mapper.Map<CardFileDTO>(request);
 
             await _cardFileService.AddCardFileAsync(formFiles, mappedCardFile);
@@ -80,9 +76,6 @@ namespace CardFile.WebAPI.Controllers
             if (formFiles == null)
                 return BadRequest("File can not be load");
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState.Values.SelectMany(x => x.Errors.Select(c => c.ErrorMessage)));
-
             var mappedCardFile = _mapper.Map<CardFileDTO>(request);
 
             await _cardFileService.UpdateCardFileAsync(cardFileId, formFiles, mappedCardFile);
@@ -105,7 +98,7 @@ namespace CardFile.WebAPI.Controllers
             if (cardFileId <= 0)
                 return NotFound();
 
-            await _cardFileService.DeleteByIdAsync(cardFileId, cancellationToken); // TODO: Handle with midle middleware?
+            await _cardFileService.DeleteByIdAsync(cardFileId, cancellationToken); // TODO: Handle with middleware?
 
             return Ok("Successfully deleted");
         }

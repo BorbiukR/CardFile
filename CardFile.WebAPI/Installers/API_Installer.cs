@@ -3,11 +3,13 @@ using CardFile.BLL.Interfaces;
 using CardFile.BLL.MappingProfiles;
 using CardFile.BLL.Services;
 using CardFile.DAL;
+using CardFile.WebAPI.Filters;
 using CardFile.WebAPI.Interfaces;
 using CardFile.WebAPI.MappingProfiles;
 using CardFile.WebAPI.Services;
 using CardFile.WebAPI.Settings;
 using Data.Interfaces;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -65,6 +67,10 @@ namespace CardFile.WebAPI.Installers
             IMapper mapper = mapperConfig.CreateMapper();
 
             services.AddSingleton(mapper);
+
+            services.AddMvc(options => { options.Filters.Add<ValidationFilter>(); })
+                    .AddFluentValidation(mvcConfiguration => 
+                        mvcConfiguration.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             services.AddCors();
             services.AddControllers();
