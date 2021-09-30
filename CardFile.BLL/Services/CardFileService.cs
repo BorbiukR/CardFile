@@ -130,11 +130,21 @@ namespace CardFile.BLL.Services
                 : true;
         }
 
-        public IEnumerable<CardFileDTO> GetAll()
+        public IEnumerable<CardFileDTO> GetAll(PaginationFilter paginationFilter = null)
         {
-            var cards = _unitOfWork.CardFileRepository.GetAllWithDetails().ToList();
+            var cards = _unitOfWork.CardFileRepository.GetAllWithDetails();
 
-            return _mapper.Map<IEnumerable<CardFileDTO>>(cards);
+            if (paginationFilter == null)
+            {
+                return _mapper.Map<IEnumerable<CardFileDTO>>(cards);
+            }
+               
+            var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
+
+            return _mapper.Map<IEnumerable<CardFileDTO>>(cards)
+                          .Skip(skip)
+                          .Take(paginationFilter.PageSize)
+                          .ToList();
         }
 
         public async Task<CardFileDTO> GetByIdAsync(int id, CancellationToken cancellationToken)
@@ -147,24 +157,46 @@ namespace CardFile.BLL.Services
             return _mapper.Map<CardFileDTO>(card);
         }
 
-        public IEnumerable<CardFileDTO> GetCardsByDateOfCreation(DateTime dateTime)
+        public IEnumerable<CardFileDTO> GetCardsByDateOfCreation(
+            DateTime dateTime, 
+            PaginationFilter paginationFilter = null)
         {
             var cards = _unitOfWork.CardFileRepository.FindByCondition(x => x.DateOfCreation == dateTime);
 
             if (cards == null)
                 throw new CardFileException("Уou cannot get cards. Cards are null");
 
-            return _mapper.Map<IEnumerable<CardFileDTO>>(cards);
+            if (paginationFilter == null)
+            {
+                return _mapper.Map<IEnumerable<CardFileDTO>>(cards);
+            }
+
+            var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
+
+            return _mapper.Map<IEnumerable<CardFileDTO>>(cards)
+                          .Skip(skip)
+                          .Take(paginationFilter.PageSize)
+                          .ToList();
         }
 
-        public IEnumerable<CardFileDTO> GetCardsByLanguage(string language)
+        public IEnumerable<CardFileDTO> GetCardsByLanguage(string language, PaginationFilter paginationFilter = null)
         {
             var cards = _unitOfWork.CardFileRepository.FindByCondition(x => x.Language == language);
 
             if (cards == null)
                 throw new CardFileException("Уou cannot get cards. Cards are null");
 
-            return _mapper.Map<IEnumerable<CardFileDTO>>(cards);
+            if (paginationFilter == null)
+            {
+                return _mapper.Map<IEnumerable<CardFileDTO>>(cards);
+            }
+
+            var skip = (paginationFilter.PageNumber - 1) * paginationFilter.PageSize;
+
+            return _mapper.Map<IEnumerable<CardFileDTO>>(cards)
+                          .Skip(skip)
+                          .Take(paginationFilter.PageSize)
+                          .ToList();
         }
 
         /// <summary>

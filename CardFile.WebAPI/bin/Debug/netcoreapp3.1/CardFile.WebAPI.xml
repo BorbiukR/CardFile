@@ -35,7 +35,7 @@
             <response code="404">Unable to delete a card due error</response>
             <response code="401">Unauthorized</response>
         </member>
-        <member name="M:CardFile.WebAPI.Controllers.CardController.GetAllCardFiles">
+        <member name="M:CardFile.WebAPI.Controllers.CardController.GetAllCardFiles(CardFile.Contracts.Requests.Queries.PaginationQuery)">
             <summary>
             Returns all the card files in the system
             </summary>
@@ -53,20 +53,22 @@
             <response code="404">Not Found any card file</response>
             <response code="401">Unauthorized</response>
         </member>
-        <member name="M:CardFile.WebAPI.Controllers.CardController.GetCardFilesByDateOfCreation(System.DateTime)">
+        <member name="M:CardFile.WebAPI.Controllers.CardController.GetCardFilesByDateOfCreation(System.DateTime,CardFile.Contracts.Requests.Queries.PaginationQuery)">
             <summary>
             Returns a card files by date of creation of a cards
             </summary>
             <param name="dateTime"></param>
+            <param name="paginationQuery"></param>
             <response code="200">Get all card files</response>
             <response code="404">Not Found any card files</response>
             <response code="401">Unauthorized</response>
         </member>
-        <member name="M:CardFile.WebAPI.Controllers.CardController.GetCardFilesByLanguage(System.String)">
+        <member name="M:CardFile.WebAPI.Controllers.CardController.GetCardFilesByLanguage(System.String,CardFile.Contracts.Requests.Queries.PaginationQuery)">
             <summary>
             Returns a card files by language of creation of a cards
             </summary>
             <param name="language"></param>
+            <param name="paginationQuery"></param>
             <response code="200">Get all card files</response>
             <response code="404">Not Found any card files</response>
             <response code="401">Unauthorized</response>

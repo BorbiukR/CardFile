@@ -110,4 +110,13 @@ InformationApplication started. Press Ctrl+C to shut down.
 9/30/2021 4:53:33 PMInformationApplication started. Press Ctrl+C to shut down.
 9/30/2021 5:08:11 PMInformationHosting environment: Development
 9/30/2021 5:08:11 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
-9/30/2021 5:08:11 PM
+9/30/2021 5:08:11 PMInformationApplication started. Press Ctrl+C to shut down.
+9/30/2021 6:49:54 PMInformationHosting environment: Development
+9/30/2021 6:49:54 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/30/2021 6:49:54 PMInformationApplication started. Press Ctrl+C to shut down.
+9/30/2021 9:04:11 PMInformationHosting environment: Development
+9/30/2021 9:04:11 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/30/2021 9:04:11 PMInformationApplication started. Press Ctrl+C to shut down.
+9/30/2021 9:56:49 PMInformationHosting environment: Development
+9/30/2021 9:56:49 PMInformationContent root path: C:\Users\user\source\repos\CardFile\CardFile.WebAPI
+9/30/2021 9:56:49 PM

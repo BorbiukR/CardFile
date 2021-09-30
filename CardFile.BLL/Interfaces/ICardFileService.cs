@@ -9,9 +9,9 @@ namespace CardFile.BLL.Interfaces
 {
     public interface ICardFileService : ICrud<CardFileDTO>
     {
-        IEnumerable<CardFileDTO> GetCardsByDateOfCreation(DateTime dateTime);
+        IEnumerable<CardFileDTO> GetCardsByDateOfCreation(DateTime dateTime, PaginationFilter paginationFilter = null);
 
-        IEnumerable<CardFileDTO> GetCardsByLanguage(string language);
+        IEnumerable<CardFileDTO> GetCardsByLanguage(string language, PaginationFilter paginationFilter = null);
 
         Task<bool> AddCardFileAsync(IFormFile uploadedFile, CardFileDTO cardFile);
 

@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
 using CardFile.BLL.DTO;
 using CardFile.BLL.Interfaces;
+using CardFile.Contracts.Requests.Queries;
 using CardFile.Contracts.Response;
+using CardFile.Contracts.Responses;
 using CardFile.WebAPI.Contracts.Request;
+using CardFile.WebAPI.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -24,12 +27,18 @@ namespace CardFile.WebAPI.Controllers
         private readonly ICardFileService _cardFileService;
         private readonly IMapper _mapper;
         private readonly ILogger<CardController> _logger;
+        private readonly IUriService _uriService;
 
-        public CardController(ICardFileService cardFileService, IMapper mapper, ILogger<CardController> logger)
+        public CardController(
+            ICardFileService cardFileService, 
+            IMapper mapper, 
+            ILogger<CardController> logger, 
+            IUriService uriService)
         {
             _cardFileService = cardFileService;
             _mapper = mapper;
             _logger = logger;
+            _uriService = uriService;
         }
 
         /// <summary>
@@ -111,15 +120,22 @@ namespace CardFile.WebAPI.Controllers
         /// <response code="401">Unauthorized</response>
         [HttpGet("cards")]
         [AllowAnonymous]
-        public IActionResult GetAllCardFiles()
+        public IActionResult GetAllCardFiles([FromQuery] PaginationQuery paginationQuery)
         {
-            var cardFiles = _cardFileService.GetAll();
+            var pagination = _mapper.Map<PaginationFilter>(paginationQuery);
+            var cardFiles = _cardFileService.GetAll(pagination);          
             var mappedCardFiles = _mapper.Map<List<CardFileResponse>>(cardFiles);
+            var cardFilesPaginationResponse = new PagedResponse<CardFileResponse>(mappedCardFiles);
 
-            if (cardFiles == null || mappedCardFiles == null)
+            if (cardFiles == null || cardFilesPaginationResponse == null)
                 return NotFound();
 
-            return Ok(mappedCardFiles);
+            if (pagination == null || pagination.PageNumber < 1 || pagination.PageSize < 1)
+                return Ok(cardFilesPaginationResponse);
+
+            var paginationResponse = PaginationHelpers.CreatePaginatedResponse(_uriService,pagination, mappedCardFiles);
+
+            return Ok(paginationResponse);
         }
 
         /// <summary>
@@ -136,51 +152,71 @@ namespace CardFile.WebAPI.Controllers
         {
             var cardFile = await _cardFileService.GetByIdAsync(id, cancellationToken);
             var mappedCardFile = _mapper.Map<CardFileResponse>(cardFile);
+            var cardFilesPaginationResponse = new Response<CardFileResponse>(mappedCardFile);
 
-            if (cardFile == null || mappedCardFile == null)
+            if (cardFile == null || cardFilesPaginationResponse == null)
                 return NotFound();
 
-            return Ok(mappedCardFile);
+            return Ok(cardFilesPaginationResponse);
         }
 
         /// <summary>
         /// Returns a card files by date of creation of a cards
         /// </summary>
         /// <param name="dateTime"></param>
+        /// <param name="paginationQuery"></param>
         /// <response code="200">Get all card files</response>
         /// <response code="404">Not Found any card files</response>
         /// <response code="401">Unauthorized</response>
         [HttpGet("cards/dateTime/{dateTime}")]
         [Authorize(Roles = "Admin,User")]
-        public IActionResult GetCardFilesByDateOfCreation(DateTime dateTime)
+        public IActionResult GetCardFilesByDateOfCreation(
+            DateTime dateTime, 
+            [FromQuery] PaginationQuery paginationQuery)
         {
-            var cardFiles = _cardFileService.GetCardsByDateOfCreation(dateTime);
+            var pagination = _mapper.Map<PaginationFilter>(paginationQuery);
+            var cardFiles = _cardFileService.GetCardsByDateOfCreation(dateTime, pagination);
             var mappedCardFiles = _mapper.Map<List<CardFileResponse>>(cardFiles);
+            var cardFilesPaginationResponse = new PagedResponse<CardFileResponse>(mappedCardFiles);
 
-            if (cardFiles == null || mappedCardFiles == null)
+            if (cardFiles == null || cardFilesPaginationResponse == null)
                 return NotFound();
 
-            return Ok(mappedCardFiles);
+            if (pagination == null || pagination.PageNumber < 1 || pagination.PageSize < 1)
+                return Ok(cardFilesPaginationResponse);
+
+            var paginationResponse = PaginationHelpers.CreatePaginatedResponse(_uriService, pagination, mappedCardFiles);
+
+            return Ok(paginationResponse);
         }
 
         /// <summary>
         /// Returns a card files by language of creation of a cards
         /// </summary>
         /// <param name="language"></param>
+        /// <param name="paginationQuery"></param>
         /// <response code="200">Get all card files</response>
         /// <response code="404">Not Found any card files</response>
         /// <response code="401">Unauthorized</response>
         [HttpGet("cards/language/{language}")]
         [Authorize(Roles = "Admin,User")]
-        public IActionResult GetCardFilesByLanguage(string language)
+
+        public IActionResult GetCardFilesByLanguage(string language, [FromQuery] PaginationQuery paginationQuery)
         {
-            var cardFiles = _cardFileService.GetCardsByLanguage(language);
+            var pagination = _mapper.Map<PaginationFilter>(paginationQuery);
+            var cardFiles = _cardFileService.GetCardsByLanguage(language, pagination);
             var mappedCardFiles = _mapper.Map<List<CardFileResponse>>(cardFiles);
+            var cardFilesPaginationResponse = new PagedResponse<CardFileResponse>(mappedCardFiles);
 
-            if (cardFiles == null || mappedCardFiles == null)
+            if (cardFiles == null || cardFilesPaginationResponse == null)
                 return NotFound();
+                
+            if (pagination == null || pagination.PageNumber < 1 || pagination.PageSize < 1)
+                return Ok(cardFilesPaginationResponse);
+            
+            var paginationResponse = PaginationHelpers.CreatePaginatedResponse(_uriService, pagination, mappedCardFiles);
 
-            return Ok(mappedCardFiles);
+            return Ok(paginationResponse);
         }
 
         /// <summary>

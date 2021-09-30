@@ -11,6 +11,7 @@ using CardFile.WebAPI.Settings;
 using Data.Interfaces;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -55,7 +56,16 @@ namespace CardFile.WebAPI.Installers
             services.AddScoped<ICardFileService, CardFileService>();
             services.AddScoped<IUserService, UserService>();
             services.AddTransient<IMailService, SendGridMailService>();
-            
+
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IUriService>(provider =>
+            {
+                var accessor = provider.GetRequiredService<IHttpContextAccessor>();
+                var request = accessor.HttpContext.Request;
+                var absoluteUri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent(), "/");
+                return new UriService(absoluteUri);
+            });
+
             services.AddAutoMapper(typeof(Startup));
 
             var mapperConfig = new MapperConfiguration(mc =>
