@@ -11,11 +11,11 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("CardFile.BLL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.BLL", "CardFile.BLL.csproj", "0")]
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("CardFile.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Contracts", "CardFile.Contracts.csproj", "0")]
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("CardFile.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.DAL", "CardFile.DAL.csproj", "0")]
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("CardFile.Identity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Identity", "CardFile.Identity.csproj", "0")]
-[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("CardFile.WebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.WebAPI", "CardFile.WebAPI.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("CardFile.BLL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\repos\\CardFile\\CardFile.BLL", "CardFile.BLL.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("CardFile.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\repos\\CardFile\\CardFile.Contracts", "CardFile.Contracts.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("CardFile.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\repos\\CardFile\\CardFile.DAL", "CardFile.DAL.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("CardFile.Identity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\repos\\CardFile\\CardFile.Identity", "CardFile.Identity.csproj", "0")]
+[assembly: Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactoryContentRootAttribute("CardFile.WebAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "D:\\repos\\CardFile\\CardFile.WebAPI", "CardFile.WebAPI.csproj", "0")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("CardFile.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

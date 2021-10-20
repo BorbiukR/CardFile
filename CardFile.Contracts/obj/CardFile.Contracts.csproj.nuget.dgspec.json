@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Contracts\\CardFile.Contracts.csproj": {}
+    "D:\\repos\\CardFile\\CardFile.Contracts\\CardFile.Contracts.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Contracts\\CardFile.Contracts.csproj": {
+    "D:\\repos\\CardFile\\CardFile.Contracts\\CardFile.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Contracts\\CardFile.Contracts.csproj",
+        "projectUniqueName": "D:\\repos\\CardFile\\CardFile.Contracts\\CardFile.Contracts.csproj",
         "projectName": "CardFile.Contracts",
-        "projectPath": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Contracts\\CardFile.Contracts.csproj",
+        "projectPath": "D:\\repos\\CardFile\\CardFile.Contracts\\CardFile.Contracts.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Contracts\\obj\\",
+        "outputPath": "D:\\repos\\CardFile\\CardFile.Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -54,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

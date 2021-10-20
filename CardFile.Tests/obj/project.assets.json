@@ -10214,11 +10214,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Tests\\CardFile.Tests.csproj",
+      "projectUniqueName": "D:\\repos\\CardFile\\CardFile.Tests\\CardFile.Tests.csproj",
       "projectName": "CardFile.Tests",
-      "projectPath": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Tests\\CardFile.Tests.csproj",
+      "projectPath": "D:\\repos\\CardFile\\CardFile.Tests\\CardFile.Tests.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Tests\\obj\\",
+      "outputPath": "D:\\repos\\CardFile\\CardFile.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10235,20 +10235,20 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.BLL\\CardFile.BLL.csproj": {
-              "projectPath": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.BLL\\CardFile.BLL.csproj"
+            "D:\\repos\\CardFile\\CardFile.BLL\\CardFile.BLL.csproj": {
+              "projectPath": "D:\\repos\\CardFile\\CardFile.BLL\\CardFile.BLL.csproj"
             },
-            "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Contracts\\CardFile.Contracts.csproj": {
-              "projectPath": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Contracts\\CardFile.Contracts.csproj"
+            "D:\\repos\\CardFile\\CardFile.Contracts\\CardFile.Contracts.csproj": {
+              "projectPath": "D:\\repos\\CardFile\\CardFile.Contracts\\CardFile.Contracts.csproj"
             },
-            "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.DAL\\CardFile.DAL.csproj": {
-              "projectPath": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.DAL\\CardFile.DAL.csproj"
+            "D:\\repos\\CardFile\\CardFile.DAL\\CardFile.DAL.csproj": {
+              "projectPath": "D:\\repos\\CardFile\\CardFile.DAL\\CardFile.DAL.csproj"
             },
-            "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Identity\\CardFile.Identity.csproj": {
-              "projectPath": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Identity\\CardFile.Identity.csproj"
+            "D:\\repos\\CardFile\\CardFile.Identity\\CardFile.Identity.csproj": {
+              "projectPath": "D:\\repos\\CardFile\\CardFile.Identity\\CardFile.Identity.csproj"
             },
-            "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.WebAPI\\CardFile.WebAPI.csproj": {
-              "projectPath": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.WebAPI\\CardFile.WebAPI.csproj"
+            "D:\\repos\\CardFile\\CardFile.WebAPI\\CardFile.WebAPI.csproj": {
+              "projectPath": "D:\\repos\\CardFile\\CardFile.WebAPI\\CardFile.WebAPI.csproj"
             }
           }
         }
@@ -10311,14 +10311,11 @@
         "assetTargetFallback": true,
         "warn": true,
         "frameworkReferences": {
-          "Microsoft.AspNetCore.App": {
-            "privateAssets": "none"
-          },
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

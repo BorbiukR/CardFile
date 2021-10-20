@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0A5IQ7sEpaZVUwrE8713uBLiYbpCSqzEChoMexX+vEzsKkiFhg3XuFsdbLT3uIBWATquUIOlQwRvzvtnu3KcrA==",
+  "dgSpecHash": "FwgZDNaMZ5CvYGkhN2n3wS1fMpwu7bt9+GJ5IEtmmKwc5+x01NHxfYFbrDhj6Ksmip5B2LSiZyyeINViJ+BwRg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.Contracts\\CardFile.Contracts.csproj",
+  "projectFilePath": "D:\\repos\\CardFile\\CardFile.Contracts\\CardFile.Contracts.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

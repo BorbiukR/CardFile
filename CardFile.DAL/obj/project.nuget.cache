@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dobfcC3rHTMb+XhzBPxW7kIUsovYG1sqla7mZSKLQUjwjJOlayA55T7xw/XzgOtSHiWeAk7EvJrlVJNx3kKaoA==",
+  "dgSpecHash": "hle/5eSV5/SMLgl9VRapsAcE+TneylH/UORaDGZDD5G3bpY17Z9xA2amuzjBp9Eq7hkSutCeHcSO+rzx28V0+A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.DAL\\CardFile.DAL.csproj",
+  "projectFilePath": "D:\\repos\\CardFile\\CardFile.DAL\\CardFile.DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

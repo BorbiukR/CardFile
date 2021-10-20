@@ -60,8 +60,8 @@ namespace CardFile.BLL.Services
             var mappedFile = _mapper.Map<CardFileEntitie>(cardFile);
 
             await _unitOfWork.CardFileRepository.AddAsync(mappedFile);
-            var added = await _unitOfWork.SaveAsync();
-            return added > 0;
+
+            return await _unitOfWork.SaveAsync() > 0;
         }
 
         public async Task<bool> UpdateCardFileAsync(
@@ -93,8 +93,8 @@ namespace CardFile.BLL.Services
             var mappedFile = _mapper.Map<CardFileEntitie>(cardFile);
 
             await _unitOfWork.CardFileRepository.UpdateAsync(mappedFile);
-            var updated = await _unitOfWork.SaveAsync();
-            return updated > 0;
+
+            return await _unitOfWork.SaveAsync() > 0;
         }
 
         public async Task<bool> DeleteByIdAsync(int cardFileId, CancellationToken cancellationToken)
@@ -117,8 +117,8 @@ namespace CardFile.BLL.Services
                 File.Delete(fullPathToCardFile);
                 
             await _unitOfWork.CardFileRepository.DeleteByIdAsync(cardFileId);
-            var deleted = await _unitOfWork.SaveAsync();
-            return deleted > 0;
+
+            return await _unitOfWork.SaveAsync() > 0;
         }
 
         public bool UserOwnsCardFileAsync(int cardFileId, string userId)

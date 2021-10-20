@@ -7,3 +7,13 @@ C:\Users\user\source\repos\CardFile\CardFile.Contracts\obj\Debug\netcoreapp3.1\C
 C:\Users\user\source\repos\CardFile\CardFile.Contracts\obj\Debug\netcoreapp3.1\CardFile.Contracts.csproj.CoreCompileInputs.cache
 C:\Users\user\source\repos\CardFile\CardFile.Contracts\obj\Debug\netcoreapp3.1\CardFile.Contracts.dll
 C:\Users\user\source\repos\CardFile\CardFile.Contracts\obj\Debug\netcoreapp3.1\CardFile.Contracts.pdb
+D:\repos\CardFile\CardFile.Contracts\bin\Debug\netcoreapp3.1\CardFile.Contracts.deps.json
+D:\repos\CardFile\CardFile.Contracts\bin\Debug\netcoreapp3.1\CardFile.Contracts.dll
+D:\repos\CardFile\CardFile.Contracts\bin\Debug\netcoreapp3.1\CardFile.Contracts.pdb
+D:\repos\CardFile\CardFile.Contracts\obj\Debug\netcoreapp3.1\CardFile.Contracts.csproj.AssemblyReference.cache
+D:\repos\CardFile\CardFile.Contracts\obj\Debug\netcoreapp3.1\CardFile.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+D:\repos\CardFile\CardFile.Contracts\obj\Debug\netcoreapp3.1\CardFile.Contracts.AssemblyInfoInputs.cache
+D:\repos\CardFile\CardFile.Contracts\obj\Debug\netcoreapp3.1\CardFile.Contracts.AssemblyInfo.cs
+D:\repos\CardFile\CardFile.Contracts\obj\Debug\netcoreapp3.1\CardFile.Contracts.csproj.CoreCompileInputs.cache
+D:\repos\CardFile\CardFile.Contracts\obj\Debug\netcoreapp3.1\CardFile.Contracts.dll
+D:\repos\CardFile\CardFile.Contracts\obj\Debug\netcoreapp3.1\CardFile.Contracts.pdb

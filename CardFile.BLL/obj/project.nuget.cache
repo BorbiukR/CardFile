@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HQXgg9j5qB8ib5HUFjft48UYXiYtZGDh4VNcA/KlFJFCr/HWcv8Pl/IiicxwIyQZZtHvmylM3U2JTHc7opH5KA==",
+  "dgSpecHash": "HvFhJYzzZzfc86wuDlQzr+BsGEOR32SxVmuOfJDWBVFYOW1UW9N0DLOf/Z+QcAXQi7RyZakJT2fcVQVijGVWwg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\source\\repos\\CardFile\\CardFile.BLL\\CardFile.BLL.csproj",
+  "projectFilePath": "D:\\repos\\CardFile\\CardFile.BLL\\CardFile.BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
